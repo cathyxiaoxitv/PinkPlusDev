@@ -17,12 +17,10 @@ export default {
 .nav-wrapper{
   display: flex;
   flex-direction: column;
-  border: 1px solid green;
   height: 100vh;
   //高度只能占一屏
 }
 .content{
-  border:1px solid blue;
   overflow: auto;
   //多了就自己加滚动条吧
   flex-grow:1;
