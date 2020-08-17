@@ -2,34 +2,55 @@
   <div>
     <ul class="types">
       <li :class="type === '-' &&'selected'"
-          @click="selectType('-')">支出</li>
+          @click="selectType('-')">支出
+      </li>
       <li :class="type === '+' &&'selected'"
-      @click="selectType('+')">收入</li>
+          @click="selectType('+')">收入
+      </li>
     </ul>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Types",
-  props: ['xxx'],
-  data() {
-    return {
-      type: '-'
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+@Component({
+  props: {
+    propMessage: String
+  }
+})
+export default class Types extends Vue {
+  type = '-';
+  helloMsg = 'Hello,' + this.propMessage;
+
+  selectType(type: string) {
+    if (type !== '-' && type !== '+') {
+      throw new Error('type is unknown');
     }
-  },
-  mounted() {
-    console.log(this.xxx);
-  },
-  methods:{
-    selectType(type){
-      if(type !== '-' && type !== '+'){
-        throw new Error('type is unknown')
-      }
-      this.type = type
-    }
+    this.type = type;
   }
 }
+// export default {
+//   name: "Types",
+//   props: ['xxx'],
+//   data() {
+//     return {
+//       type: '-'
+//     }
+//   },
+//   mounted() {
+//     console.log(this.xxx);
+//   },
+//   methods:{
+//     selectType(type){
+//       if(type !== '-' && type !== '+'){
+//         throw new Error('type is unknown')
+//       }
+//       this.type = type
+//     }
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>
