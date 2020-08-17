@@ -1,6 +1,9 @@
 <template>
   <Details>
     <p>记录</p>
+    <label >
+      <input type="text" placeholder="未输入">
+    </label>
   </Details>
 </template>
 
@@ -13,19 +16,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.notes {
-  display: flex;
-  align-items: center;
-
-  .name {
-    padding-right: 16px;
-  }
-
   input {
-    flex-grow: 1;
     border: none;
-    padding-right: 16px;
 
   }
-}
+
 </style>

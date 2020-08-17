@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <Types/>
+    <Types xxx="hi"/>
     <Date/>
     <Notes/>
     <Number/>

@@ -1,10 +1,7 @@
 <template>
-  <div>
+  <div class="details">
     <slot>
     </slot>
-    <label class="details">
-      <input type="text">
-    </label>
   </div>
 
 </template>
@@ -16,13 +13,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p{
+  padding: 10px;
+}
 .details {
   padding: 5px;
   display: flex;
-  border-bottom:1px solid lightgray ;
+  border-bottom:1px solid lightgray;
   min-height: 50px;
   font-weight: bold;
- & input{
+ & .inputBox{
+   display: flex;
+   align-items: center;
+   justify-content: center;
    min-width: 200px;
    height: 80% ;
    border: none;
@@ -30,6 +33,4 @@ export default {
    background: #FFEEED;
  }
  }
-
-
 </style>

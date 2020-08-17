@@ -1,7 +1,11 @@
 <template v-slot:name>
   <Details>
     <p>日期</p>
+    <label >
+      <input type="text" class="inputBox">
+    </label>
   </Details>
+
 </template>
 
 <script lang="ts">
@@ -12,17 +16,3 @@ name: "Date",
   components: {Details}
 }
 </script>
-
-<style lang="scss" scoped>
-.date {
-
-  .name {
-
-  }
-
-  input {
-
-
-  }
-}
-</style>

@@ -1,6 +1,9 @@
 <template>
   <Details>
     <p>支出</p>
+    <label >
+      <input type="text" class="inputBox">
+    </label>
   </Details>
 </template>
 
