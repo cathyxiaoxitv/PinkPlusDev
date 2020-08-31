@@ -19,7 +19,7 @@
 
 </template>
 
-<script lang="ts">
+<script>
 
 import Details from '@/components/Money/Details.vue';
 import Button from '@/components/Money/Button.vue';

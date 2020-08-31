@@ -1,12 +1,14 @@
 <template>
   <Layout>
-    <p class="title">日历</p>
-    <Calendar/>
+    <p slot="header"  class="title">日历</p>
+    <div slot="body"> 我来自Calendar
+    </div>
   </Layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
 
 export default class Calendar extends Vue{
 };

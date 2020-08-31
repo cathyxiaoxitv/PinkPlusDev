@@ -1,6 +1,7 @@
-<template>
+<template >
   <Layout>
-    <Tabs class-prefix="interval" :data-source="array1" :value.sync="interval"/>
+    <Tabs slot="header" class-prefix="interval" :data-source="array1" :value.sync="interval"/>
+    <div slot="body">我来自Reports</div>
   </Layout>
 </template>
 

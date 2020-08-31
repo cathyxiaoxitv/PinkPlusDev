@@ -2,8 +2,9 @@
   <div class="layout-wrapper">
     <div class="content">
       <header>
-        <slot/>
+        <slot name="header"/>
       </header>
+      <slot name="body"/>
     </div>
     <Nav/>
   </div>
