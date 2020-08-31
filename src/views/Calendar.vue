@@ -1,12 +1,14 @@
 <template>
   <Layout>
     <p class="title">日历</p>
+    <Calendar/>
   </Layout>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'Calendar',
+import Vue from 'vue';
+
+export default class Calendar extends Vue{
 };
 </script>
 

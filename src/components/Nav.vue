@@ -4,12 +4,12 @@
       <Icon name="money"/>
       记账
     </router-link>
-    <router-link to="/labels" class="item" active-class="selected">
-      <Icon name="label"/>
+    <router-link to="/calendar" class="item" active-class="selected">
+      <Icon name="calendar"/>
       日历
     </router-link>
-    <router-link to="/statistics" class="item" active-class="selected">
-      <Icon name="statistics"/>
+    <router-link to="/reports" class="item" active-class="selected">
+      <Icon name="reports"/>
       报告
     </router-link>
   </nav>
