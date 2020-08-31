@@ -1,7 +1,7 @@
 <template>
   <Details>
-    <p>记录</p>
-    <label >
+    <p slot="title">记录</p>
+    <label slot="content">
       <input type="text" placeholder="未输入">
     </label>
   </Details>
@@ -18,7 +18,6 @@ export default {
 <style lang="scss" scoped>
   input {
     border: none;
-
   }
 
 </style>

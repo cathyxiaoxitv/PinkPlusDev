@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Money from '@/views/Money.vue';
-import Labels from '@/views/Labels.vue';
-import Statistics from '@/views/Statistics.vue';
+import Labels from '@/views/Calendar.vue';
+import Reports from '@/views/Reports.vue';
 import NotFound from '@/views/NotFound.vue';
 
 Vue.use(VueRouter)
@@ -22,7 +22,7 @@ Vue.use(VueRouter)
     },
     {
       path:'/statistics',
-      component:Statistics
+      component:Reports
     },
     {
       path:'*',

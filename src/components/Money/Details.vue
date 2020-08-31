@@ -1,6 +1,10 @@
 <template>
   <div class="details">
-    <slot>
+    <slot name="title">这里放标题</slot>
+    <slot name="content">
+      <label>
+        <input type="text" class="inputBox">
+      </label>
     </slot>
   </div>
 

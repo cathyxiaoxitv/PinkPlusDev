@@ -1,9 +1,6 @@
 <template v-slot:name>
   <Details>
-    <p>日期</p>
-    <label >
-      <input type="text" class="inputBox">
-    </label>
+    <p slot="title">日期</p>
   </Details>
 
 </template>

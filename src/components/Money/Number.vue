@@ -1,9 +1,6 @@
 <template>
   <Details>
-    <p>支出</p>
-    <label >
-      <input type="text" class="inputBox">
-    </label>
+    <p slot="title">支出</p>
   </Details>
 </template>
 
@@ -17,12 +14,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.expense {
-  .name {
 
-  }
-
-  input {
-  }
-}
 </style>

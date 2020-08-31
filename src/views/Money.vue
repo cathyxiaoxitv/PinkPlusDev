@@ -1,25 +1,26 @@
 <template>
   <Layout>
-    <Types xxx="hi"/>
-    <Date/>
-    <Notes/>
-    <Number/>
-    <Tags/>
-    <Button/>
+    <Tabs :data-source="array" :value.sync="type"/>
   </Layout>
 </template>
 
 <script lang="ts">
 
-import Types from '@/components/Money/Types.vue';
+import Vue from 'vue';
 import Date from '@/components/Money/Date.vue';
 import Notes from '@/components/Money/Notes.vue';
 import Number from '@/components/Money/Number.vue';
-import Tags from '@/components/Money/Tags.vue';
 import Button from '@/components/Money/Button.vue';
+import Tabs from '@/components/Money/Tabs.vue';
 
-export default {
-  name: 'Money',
-  components: {Button, Tags, Number, Notes, Date, Types},
+import {Component} from 'vue-property-decorator';
+import Details from '@/components/Money/Details.vue';
+
+@Component({
+  components: {Button,Number, Notes, Date, Details, Tabs}})
+
+export default class Money extends Vue{
+  array = [{text:'支出',value:'-'},{text:'收入',value:'+'}]
+  type = '-'
 };
 </script>
