@@ -15,6 +15,7 @@ const store= new Vuex.Store({
   mutations: {
     createRecord(state,record){
       const clonedRecord: RecordItem = JSON.parse(JSON.stringify(record));
+      clonedRecord.createdAt = new Date().toISOString();
       state.recordList.push(clonedRecord);
       store.commit('saveRecords');
     },

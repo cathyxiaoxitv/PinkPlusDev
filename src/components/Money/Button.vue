@@ -1,17 +1,16 @@
 <template>
-  <button @submit="onValueChanged">支出输入</button>
+  <button @click="ok">支出输入</button>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
 export default class Button extends Vue{
-  onValueChanged(){
+  ok(){
+    this.$emit('submit')
     console.log('hi');
   }
 }
-
-
 </script>
 
 <style lang="scss" scoped>

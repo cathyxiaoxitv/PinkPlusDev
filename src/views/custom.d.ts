@@ -10,7 +10,7 @@ type Tag = {
 
 type RecordItem = {
   type: string
-  createdAt: string
+  createdAt?: string
   notes: string
   amount: number
   category: string
