@@ -1,10 +1,8 @@
 <template>
-  <div class="details">
-    <slot name="title">这里放标题</slot>
+  <div class="parts">
+    <slot name="title"></slot>
     <slot name="content">
-      <label>
-        <input type="text" class="inputBox">
-      </label>
+
     </slot>
   </div>
 
@@ -12,7 +10,7 @@
 
 <script lang="ts">
 export default {
-  name: 'Details'
+  name: 'Parts'
 };
 </script>
 
@@ -20,7 +18,7 @@ export default {
 p{
   padding: 10px;
 }
-.details {
+.parts {
   padding: 5px;
   display: flex;
   border-bottom:1px solid lightgray;

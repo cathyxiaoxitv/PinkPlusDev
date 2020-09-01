@@ -1,17 +1,25 @@
 <template>
-  <Details>
+  <Parts>
     <p slot="title">记录</p>
     <label slot="content">
-      <input type="text" placeholder="未输入">
+      <input type="text" placeholder="未输入" @change="onValueChanged">
     </label>
-  </Details>
+  </Parts>
 </template>
 
 <script lang="ts">
-import Details from '@/components/Money/Details.vue';
-export default {
-  name: 'Notes',
-  components: {Details}
+import Vue from 'vue';
+import Parts from '@/components/Money/Parts.vue';
+import {Component, Watch} from 'vue-property-decorator'
+
+@Component({components:{Parts}})
+export default class Notes extends Vue{
+  value = '';
+  @Watch('value')
+  onValueChanged(val: string) {
+    this.$emit('update:value', val)
+    console.log(val);
+  }
 };
 </script>
 

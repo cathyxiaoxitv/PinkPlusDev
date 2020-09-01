@@ -1,46 +1,54 @@
 <template>
-  <Details>
+  <Parts>
     <div slot="title" class="title">分类</div>
     <ul slot="content" class="tagList">
-      <li>饮食费</li>
-      <li>日用品</li>
-      <li>衣服</li>
-      <li>美容</li>
-      <li>交际费</li>
-      <li>医疗费</li>
-      <li>教育费</li>
-      <li>水电费</li>
-      <li>交通费</li>
-      <li>电话费</li>
-      <li>房费</li>
-      <li>编辑 ></li>
+      <li v-for="tag in tagList" :key="tag.id"
+          :class="{selected:selectedTags.indexOf(tag) >= 0}"
+      @click="select(tag)">
+        {{tag.name}}
+      </li>
     </ul>
-  </Details>
+  </Parts>
 
 </template>
 
-<script>
+<script lang="ts">
 
-import Details from '@/components/Money/Details.vue';
-import Button from '@/components/Money/Button.vue';
 
-export default {
-  name: 'Categories',
-  components: {Button, Details}
+
+import {Component} from 'vue-property-decorator';
+import Vue from 'vue';
+import Parts from '@/components/Money/Parts.vue';
+
+@Component({components:{Parts}})
+export default class Categories extends Vue{
+  selectedTags:string[] = []
+  get tagList(){
+    return this.$store.state.tagList;
+  }
+  select(tag:string){
+    if(this.selectedTags ===[]){
+      this.selectedTags.push(tag);
+    }else{
+      this.selectedTags = []
+      this.selectedTags.push(tag);
+    }
+    this.$emit('update:value',this.selectedTags)
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.details {
+.parts {
   display: contents;
 
   > .title {
     padding: 15px;
-
   }
 
   > .tagList {
     width: 100%;
+    height: 300px;
     display: flex;
     flex-wrap: wrap;
     margin-left: auto;
@@ -56,6 +64,11 @@ export default {
       margin: 12px;
       width: 100px;
       height: 77px;
+
+      &.selected {
+        background: #FF898D;
+        color: white;
+      }
     }
 
   }
