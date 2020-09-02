@@ -2,7 +2,10 @@
   <Parts>
     <p slot="title">记录</p>
     <label slot="content">
-      <input type="text" placeholder="未输入" @change="onValueChanged">
+      <input type="text"
+             :value="value"
+             :placeholder="placeholder"
+             @input="onValueChanged">
     </label>
   </Parts>
 </template>
@@ -10,15 +13,15 @@
 <script lang="ts">
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
-import {Component, Watch} from 'vue-property-decorator'
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component({components:{Parts}})
 export default class Notes extends Vue{
-  value = '';
-  @Watch('value')
-  onValueChanged(val: string) {
-    this.$emit('update:value', val)
-    console.log(val);
+  @Prop({default:''})readonly value!:string;
+  @Prop()placeholder?:string;
+  onValueChanged(event:InputEvent){
+      const output = event.currentTarget.value;
+      this.$emit('update:value',output)
   }
 };
 </script>

@@ -13,5 +13,5 @@ type RecordItem = {
   createdAt?: string
   notes: string
   amount: number
-  category: string
+  category: string[]
 }

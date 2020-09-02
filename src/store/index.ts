@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import clone from '@/lib/clone';
 
 Vue.use(Vuex);
 
@@ -13,8 +14,12 @@ const store= new Vuex.Store({
     recordList:[]
   } as RootState,
   mutations: {
+    fetchRecords(state){
+      state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
+    },
     createRecord(state,record){
-      const clonedRecord: RecordItem = JSON.parse(JSON.stringify(record));
+      const clonedRecord: RecordItem = clone(record);
+      console.log(record);
       clonedRecord.createdAt = new Date().toISOString();
       state.recordList.push(clonedRecord);
       store.commit('saveRecords');

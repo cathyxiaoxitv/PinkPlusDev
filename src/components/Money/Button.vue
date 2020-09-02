@@ -1,5 +1,5 @@
 <template>
-  <button @click="ok">支出输入</button>
+  <button @click="ok">确定</button>
 </template>
 
 <script lang="ts">
@@ -8,7 +8,6 @@ import Vue from 'vue';
 export default class Button extends Vue{
   ok(){
     this.$emit('submit')
-    console.log('hi');
   }
 }
 </script>
