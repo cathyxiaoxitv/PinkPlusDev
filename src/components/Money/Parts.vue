@@ -2,7 +2,6 @@
   <div class="parts">
     <slot name="title"></slot>
     <slot name="content">
-
     </slot>
   </div>
 
@@ -24,13 +23,17 @@ p{
   border-bottom:1px solid lightgray;
   min-height: 50px;
   font-weight: bold;
- & .inputBox{
+  align-items: center;
+  justify-content: center;
+ & input{
+   border: none;
    display: flex;
    align-items: center;
    justify-content: center;
-   min-width: 200px;
-   height: 80% ;
-   border: none;
+   min-width: 250px;
+   min-height: 40px ;
+   padding: 0 10px;
+   margin:0 30px;
    border-radius: 5px;
    background: #FFEEED;
  }

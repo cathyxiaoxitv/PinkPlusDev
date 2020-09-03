@@ -27,8 +27,6 @@ export default class Notes extends Vue{
 </script>
 
 <style lang="scss" scoped>
-  input {
-    border: none;
-  }
+
 
 </style>

@@ -46,7 +46,6 @@ export default class Tabs extends Vue {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   > li {
     border-radius: 5px;
     padding: 3px 35px;

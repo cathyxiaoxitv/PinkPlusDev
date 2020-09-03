@@ -2,7 +2,7 @@
   <Parts>
     <p slot="title">支出</p>
     <label slot="content">
-      <input id="amount" class="inputBox" type="number" @input="onValueChanged" >
+      <input id="amount" class="inputBox" @input="onValueChanged" >
     </label>
   </Parts>
 </template>

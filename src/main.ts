@@ -9,13 +9,10 @@ import Icon from '@/components/Icon.vue';
 
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-moment.locale('zh-cn')
-
+Vue.use(Antd);
 
 Vue.config.productionTip = false
-Vue.use(Antd)
+
 
 Vue.component('Nav',Nav)
 Vue.component('Layout',Layout)

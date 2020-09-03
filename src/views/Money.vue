@@ -2,6 +2,7 @@
   <Layout>
     <Tabs slot="header" :data-source="recordTypeList" :value.sync="type"/>
     <div slot="body">
+      <Date/>
       <Notes placeholder="在这里输入备注" @update:value="record.notes = $event"/>
       <Number :value.sync="record.amount"/>
       <Categories @update:value="record.category = $event"/>
@@ -20,9 +21,10 @@ import {Component} from 'vue-property-decorator';
 import Parts from '@/components/Money/Parts.vue';
 import Categories from '@/components/Money/Categories.vue';
 import recordTypeList from '@/constants/recordTypeList';
+import Date from '@/components/Money/Date.vue';
 
 @Component({
-  components: {Categories,Number, Notes, Parts, Tabs}})
+  components: {Date, Categories,Number, Notes, Parts, Tabs}})
 
 export default class Money extends Vue{
   get recordList(){
