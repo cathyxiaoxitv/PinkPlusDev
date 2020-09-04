@@ -2,27 +2,38 @@
   <Parts>
     <p slot="title">日期</p>
       <div slot="content">
-        <a-date-picker @change="onChange" />
+        <a-date-picker placeholder="选择日期" :defaultValue="moment(getCurrentDate(), 'YYYY-MM-DD')" />
       </div>
   </Parts>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import moment from 'moment';
 import {Component} from 'vue-property-decorator';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
 @Component({
   components: {Icon, Parts}
 })
-export default class Date extends Vue {
+export default class DatePicker extends Vue {
+  moment = moment;
+  getCurrentDate() {
+    return new
+    Date().toLocaleDateString();
+  };
   onChange(){
-    console.log('hi');
+    console.log('HI');
   }
 
-}
-</script>
+
+}</script>
 
 <style lang="scss" scoped>
+.ant-input{
+  background: #FEF0EB;
+  font-weight: bold;
+  font-size: large;
+}
 
 </style>

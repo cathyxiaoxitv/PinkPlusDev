@@ -21,7 +21,7 @@ import {Component} from 'vue-property-decorator';
 import Parts from '@/components/Money/Parts.vue';
 import Categories from '@/components/Money/Categories.vue';
 import recordTypeList from '@/constants/recordTypeList';
-import Date from '@/components/Money/Date.vue';
+import Date from '@/components/Money/DatePicker.vue';
 
 @Component({
   components: {Date, Categories,Number, Notes, Parts, Tabs}})

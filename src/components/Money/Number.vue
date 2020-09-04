@@ -2,7 +2,7 @@
   <Parts>
     <p slot="title">支出</p>
     <label slot="content">
-      <a-input id="amount" @input="onValueChanged"/>
+      <a-input value="0" @input="onValueChanged"/>
     </label>
   </Parts>
 </template>
@@ -26,14 +26,10 @@ export default class Number extends Vue{
 </script>
 
 <style lang="scss" scoped>
-.inputBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 200px;
-  height: 80%;
-  border: none;
-  border-radius: 5px;
+.ant-input{
+  background: #FEF0EB;
+  font-weight: bold;
+  font-size: large;
 }
 
 </style>

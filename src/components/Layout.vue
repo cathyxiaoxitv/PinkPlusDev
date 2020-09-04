@@ -23,7 +23,6 @@ export default {
   height: 100%;
   //高度只能占一屏
   header{
-    border: 5px solid green;
     height:50px;
     background: #F8F8F8;
     display: flex;
@@ -32,7 +31,7 @@ export default {
     align-items: center;
   }
   main {
-    border: 5px solid blue;
+    border: 1px solid red;
     overflow: auto;
     //多了就自己加滚动条吧
     flex: 1;
