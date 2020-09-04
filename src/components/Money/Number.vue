@@ -2,7 +2,7 @@
   <Parts>
     <p slot="title">支出</p>
     <label slot="content">
-      <input id="amount" class="inputBox" @input="onValueChanged" >
+      <a-input id="amount" @input="onValueChanged"/>
     </label>
   </Parts>
 </template>
@@ -11,8 +11,9 @@
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import {Component,Prop} from 'vue-property-decorator';
+import Icon from '@/components/Icon.vue';
 
-@Component({components:{Parts}})
+@Component({components:{Icon, Parts}})
 export default class Number extends Vue{
   @Prop() readonly  value!:number
   output = this.value.toString();
@@ -33,7 +34,6 @@ export default class Number extends Vue{
   height: 80%;
   border: none;
   border-radius: 5px;
-  background: #FFEEED;
 }
 
 </style>

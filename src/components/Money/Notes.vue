@@ -2,10 +2,10 @@
   <Parts>
     <p slot="title">记录</p>
     <label slot="content">
-      <input type="text"
+      <a-input type="text"
              :value="value"
              :placeholder="placeholder"
-             @input="onValueChanged">
+             @input="onValueChanged"/>
     </label>
   </Parts>
 </template>
@@ -27,6 +27,5 @@ export default class Notes extends Vue{
 </script>
 
 <style lang="scss" scoped>
-
 
 </style>

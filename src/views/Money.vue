@@ -44,7 +44,7 @@ export default class Money extends Vue{
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 button {
-  width: 90vw;
+  width: 300px;
   background: $color-highlight;
   border: none;
   display: flex;

@@ -1,11 +1,11 @@
 <template>
   <div class="layout-wrapper">
-    <div class="content">
       <header>
         <slot name="header"/>
       </header>
+    <main>
       <slot name="body"/>
-    </div>
+    </main>
     <Nav/>
   </div>
 </template>
@@ -20,20 +20,24 @@ export default {
 .layout-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   //高度只能占一屏
-  .content {
+  header{
+    border: 5px solid green;
+    height:50px;
+    background: #F8F8F8;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  main {
+    border: 5px solid blue;
     overflow: auto;
     //多了就自己加滚动条吧
-    flex-grow: 1;
-    header{
-      height:50px;
-      background: #F8F8F8;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 

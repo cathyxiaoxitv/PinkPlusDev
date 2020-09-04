@@ -1,6 +1,6 @@
 <template>
   <Parts>
-    <div slot="title" class="title">分类</div>
+    <p slot="title" class="title">分类</p>
     <ul slot="content" class="tagList">
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag) >= 0}"

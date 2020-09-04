@@ -11,8 +11,9 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Parts from '@/components/Money/Parts.vue';
+import Icon from '@/components/Icon.vue';
 @Component({
-  components: {Parts}
+  components: {Icon, Parts}
 })
 export default class Date extends Vue {
   onChange(){
