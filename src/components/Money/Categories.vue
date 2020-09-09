@@ -7,8 +7,7 @@
           :class="{selected:selectedTags.indexOf(tag) >= 0}"
       @click="select(tag)">
         <div class="icon-wrapper">
-          <Icon :name="icons"/>
-
+          <Icon :name="tag.name"></Icon>
         </div>
         {{tag.name}}
       </li>
@@ -50,7 +49,6 @@ p{
   font-weight: bold;
 }
    .tagList {
-     border: 1px solid pink;
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
@@ -63,10 +61,14 @@ p{
       width: 33.33%;
       margin: 10px 0;
 
-
+      svg{
+        border: 1px solid red;
+        height: 30px;
+        width: 30px;
+      }
       &.selected {
-        background: #FF898D;
-        color: white;
+        border:2px solid darkgray;
+
       }
     }
 

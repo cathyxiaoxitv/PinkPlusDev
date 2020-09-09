@@ -3,16 +3,17 @@
     <Tabs slot="header" class-prefix="interval" :data-source="array1" :value.sync="interval"/>
     <div slot="body">
       <NumericInput placeholder="touch to input" v-model="amount" />
+
     </div>
   </Layout>
 </template>
 
 <script lang="ts">
 
-import {NumericInput} from 'numeric-keyboard';
-import Tabs from '@/components/Money/Tabs.vue';
+import {NumericInput} from 'numeric-keyboard'
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import Tabs from '@/components/Money/Tabs.vue';
 
 
 @Component({

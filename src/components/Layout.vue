@@ -31,7 +31,6 @@ export default {
     align-items: center;
   }
   main {
-    border: 1px solid red;
     overflow: auto;
     //多了就自己加滚动条吧
     flex: 1;
