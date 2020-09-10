@@ -10,9 +10,11 @@
 body {
   max-width: 500px;
   margin: 0 auto;
+
 }
 
 #app {
+
   position: relative;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

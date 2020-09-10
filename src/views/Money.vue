@@ -1,14 +1,21 @@
 <template slot="header">
+
   <Layout>
     <Tabs slot="header" :data-source="recordTypeList" :value.sync="type"/>
-    <div slot="body">
+    <div slot="body" class="body">
+      <div class="parts-wrapper">
       <Date/>
       <Notes placeholder="在这里输入备注" @update:value="record.notes = $event"/>
       <Number :value.sync="record.amount"/>
       <Categories @update:value="record.category = $event"/>
-      <button @click="saveRecord">确定</button>
+      </div>
+      <div class="-button-wrapper">
+        <button @click="saveRecord">确定</button>
+      </div>
     </div>
   </Layout>
+
+
 </template>
 
 <script lang="ts">
@@ -24,36 +31,60 @@ import recordTypeList from '@/constants/recordTypeList';
 import Date from '@/components/Money/DatePicker.vue';
 
 @Component({
-  components: {Date, Categories,Number, Notes, Parts, Tabs}})
+  components: {Date, Categories, Number, Notes, Parts, Tabs}
+})
 
-export default class Money extends Vue{
-  get recordList(){
+export default class Money extends Vue {
+  get recordList() {
     return this.$store.state.recordList;
   }
-  recordTypeList= recordTypeList
-  type = '-'
+
+  recordTypeList = recordTypeList;
+  type = '-';
   record: RecordItem = {
     category: [], notes: '', type: '-', amount: 0
   };
-  saveRecord(){
-    this.$store.commit('createRecord',this.record)
+
+  saveRecord() {
+    this.$store.commit('createRecord', this.record);
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-button {
-  width: 300px;
-  background: $color-highlight;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
-  color: white;
-  font-weight: bold;
-  margin: 20px auto 40px;
-  border-radius: 20px;
+.body{
+  border: 1px solid green;
+  height: 100%;
+
+.parts-wrapper{
+  overflow: -moz-scrollbars-none;
+  height: 85%;
+  border: 5px solid red;
+  overflow: auto;
 }
+  .-button-wrapper {
+    height: 15%;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 80%;
+      background: $color-highlight;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+    }
+}
+
+
+
+}
+
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div>
-      <p slot="title">分类</p>
+    <p slot="title">分类</p>
 
     <ul slot="content" class="tagList">
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag) >= 0}"
-      @click="select(tag)">
+          @click="select(tag)">
         <div class="icon-wrapper">
           <Icon :name="tag.name"></Icon>
         </div>
-        {{tag.name}}
+        {{ tag.name }}
       </li>
     </ul>
   </div>
@@ -18,62 +18,92 @@
 <script lang="ts">
 
 
-
 import {Component} from 'vue-property-decorator';
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
 
-@Component({components:{Icon, Parts}})
-export default class Categories extends Vue{
-  selectedTags:string[] = []
-  get tagList(){
+@Component({components: {Icon, Parts}})
+export default class Categories extends Vue {
+  selectedTags: string[] = [];
+
+  get tagList() {
     return this.$store.state.tagList;
   }
-  select(tag:string){
-    if(this.selectedTags ===[]){
+
+  select(tag: string) {
+    if (this.selectedTags === []) {
       this.selectedTags.push(tag);
-    }else{
-      this.selectedTags = []
+    } else {
+      this.selectedTags = [];
       this.selectedTags.push(tag);
     }
-    this.$emit('update:value',this.selectedTags)
+    this.$emit('update:value', this.selectedTags);
 
   }
 };
 </script>
 
 <style lang="scss" scoped>
-p{
-  padding:  10px 20px;
+@import "~@/assets/style/helper.scss";
+p {
+  padding: 10px 20px;
   font-weight: bold;
 }
-   .tagList {
+
+.tagList {
+  border: 3px solid yellow;
+  flex-grow: 1;
+  height:40vh ;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  padding: 10px;
+
+  > li {
+    border: 1px solid lightgray;
+    border-radius: 5px;
     display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    > li {
-      border: 1px solid lightgray;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 33.33%;
-      margin: 10px 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-      svg{
-        border: 1px solid red;
-        height: 30px;
-        width: 30px;
-      }
-      &.selected {
-        border:2px solid darkgray;
+    svg {
+      margin: 8px;
+      height: 25px;
+      width: 25px;
+    }
 
+    &.selected {
+      box-shadow: 0 0 2px lightgray;
+      background: #FEF0EB;
+
+      svg {
+        animation: shake 0.3s linear;
       }
     }
 
+    @keyframes shake {
+      0% {
+        transform: rotate(0deg);
+      }
+      20% {
+        transform: rotate(20deg);
+      }
+      40% {
+        transform: rotate(0deg);
+      }
+      80%{
+        transform: rotate(-20deg);
+      }
+      100% {
+        transform:rotate(0deg);
+      }
+    }
   }
-
+}
 
 
 </style>
