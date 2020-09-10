@@ -72,8 +72,8 @@ p {
 
     svg {
       margin: 8px;
-      height: 25px;
-      width: 25px;
+      height: 30px;
+      width: 30px;
     }
 
     &.selected {
