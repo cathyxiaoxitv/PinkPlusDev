@@ -7,7 +7,7 @@
           :class="{selected:selectedTags.indexOf(tag) >= 0}"
           @click="select(tag)">
         <div class="icon-wrapper">
-          <Icon v-if="typeText === '+'" :name="tag.name"></Icon>
+          <Icon v-if="typeText === '-'" :name="tag.name"></Icon>
           <Icon v-else :name="tag.name"></Icon>
         </div>
         {{ tag.name }}
