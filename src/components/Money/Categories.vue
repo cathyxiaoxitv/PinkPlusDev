@@ -7,7 +7,8 @@
           :class="{selected:selectedTags.indexOf(tag) >= 0}"
           @click="select(tag)">
         <div class="icon-wrapper">
-          <Icon :name="tag.name"></Icon>
+          <Icon></Icon>
+          {{typeText}}
         </div>
         {{ tag.name }}
       </li>
@@ -18,7 +19,7 @@
 <script lang="ts">
 
 
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
@@ -26,6 +27,7 @@ import Icon from '@/components/Icon.vue';
 @Component({components: {Icon, Parts}})
 export default class Categories extends Vue {
   selectedTags: string[] = [];
+  @Prop() typeText!:string
 
   get tagList() {
     return this.$store.state.tagList;
@@ -53,14 +55,13 @@ p {
 
 .tagList {
   border: 3px solid yellow;
-  flex-grow: 1;
-  height:40vh ;
+  height:50vh;
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  padding: 10px;
+  padding: 0 10px;
 
   > li {
     border: 1px solid lightgray;

@@ -5,7 +5,8 @@ type RootState = {
 
 type Tag = {
   id: string,
-  name: string
+  name: string,
+  type:string
 }
 
 type RecordItem = {

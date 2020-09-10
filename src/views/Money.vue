@@ -1,13 +1,13 @@
 <template slot="header">
 
   <Layout>
-    <Tabs slot="header" :data-source="recordTypeList" :value.sync="type"/>
+    <Tabs slot="header" :data-source="recordTypeList" :value.sync="type" />
     <div slot="body" class="body">
       <div class="parts-wrapper">
       <Date/>
       <Notes placeholder="在这里输入备注" @update:value="record.notes = $event"/>
-      <Number :value.sync="record.amount"/>
-      <Categories @update:value="record.category = $event"/>
+      <Number :value.sync="record.amount" :type-text="type" />
+      <Categories @update:value="record.category = $event" :type-text="type"/>
       </div>
       <div class="-button-wrapper">
         <button @click="saveRecord">确定</button>
@@ -47,6 +47,7 @@ export default class Money extends Vue {
 
   saveRecord() {
     this.$store.commit('createRecord', this.record);
+    console.log(this.record.type);
   }
 };
 </script>
@@ -56,9 +57,10 @@ export default class Money extends Vue {
 .body{
   border: 1px solid green;
   height: 100%;
-
+  //::-webkit-scrollbar{
+  //  display: none;
+  //}
 .parts-wrapper{
-  overflow: -moz-scrollbars-none;
   height: 85%;
   border: 5px solid red;
   overflow: auto;
