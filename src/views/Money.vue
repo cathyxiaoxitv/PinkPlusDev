@@ -55,19 +55,16 @@ export default class Money extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .body{
-  border: 1px solid green;
   height: 100%;
   //::-webkit-scrollbar{
   //  display: none;
   //}
 .parts-wrapper{
   height: 85%;
-  border: 5px solid red;
   overflow: auto;
 }
   .-button-wrapper {
     height: 15%;
-    border: 1px solid blue;
     display: flex;
     justify-content: center;
     align-items: center;

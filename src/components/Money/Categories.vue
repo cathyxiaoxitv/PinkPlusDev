@@ -54,7 +54,6 @@ p {
 }
 
 .tagList {
-  border: 3px solid yellow;
   height:50vh;
   overflow: auto;
   display: grid;
