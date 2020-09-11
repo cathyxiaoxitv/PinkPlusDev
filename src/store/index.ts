@@ -11,11 +11,21 @@ const createTag = (name: string, type: string) => {
     return {id: id, name: name, type: type}
 
 }
+
 const store = new Vuex.Store({
     state: {
         tagList: [createTag('饮食费', '-'),
-            createTag('工资', '+'),
-            createTag('美容', '-')],
+            createTag('日用品', '-'),
+            createTag('衣服', '-'),
+            createTag('美容', '-'),
+            createTag('交际费', '-'),
+            createTag('医疗费', '-'),
+            createTag('教育费', '-'),
+            createTag('水电费', '-'),
+            createTag('交通费', '-'),
+            createTag('电话费', '-'),
+            createTag('房费', '-'),
+            createTag('工资', '+')],
         recordList: []
     } as RootState,
     mutations: {
