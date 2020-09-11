@@ -3,7 +3,7 @@
     <p slot="title" v-if="type === '-'">支出</p>
     <p slot="title" v-else>收入</p>
     <label slot="content" >
-      <a-input value="0" @input="onValueChanged"/>
+      <a-input type="number" pattern="\d*" value="0" prefix="￥" suffix="JPY"/>
     </label>
   </Parts>
 </template>
@@ -37,5 +37,6 @@ export default class Number extends Vue{
   font-weight: bold;
   font-size: large;
 }
+
 
 </style>

@@ -31,20 +31,20 @@ import Icon from '@/components/Icon.vue';
 export default class Categories extends Vue {
   selectedTags: string[] = [];
   @Prop() type!:string
-
+//better 如何一进入页面就有默认selected
   get filteredList() {
     return this.$store.state.tagList.filter((tag:Tag) =>tag.type === this.type )
   }
-
   select(tag: string) {
+    console.log(tag);
     if (this.selectedTags === []) {
       this.selectedTags.push(tag);
+      console.log(this.selectedTags);
     } else {
       this.selectedTags = [];
       this.selectedTags.push(tag);
     }
     this.$emit('update:value', this.selectedTags);
-    console.log('hi');
 
   }
 };
