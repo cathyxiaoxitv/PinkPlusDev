@@ -25,7 +25,13 @@ const store = new Vuex.Store({
             createTag('交通费', '-'),
             createTag('电话费', '-'),
             createTag('房费', '-'),
-            createTag('工资', '+')],
+            createTag('工资', '+'),
+            createTag('零花钱', '+'),
+            createTag('奖金', '+'),
+            createTag('副业', '+'),
+            createTag('投资', '+'),
+            //better
+        ],
         recordList: []
     } as RootState,
     mutations: {

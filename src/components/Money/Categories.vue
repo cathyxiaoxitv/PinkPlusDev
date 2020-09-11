@@ -1,17 +1,21 @@
 <template>
   <div>
     <p slot="title">分类</p>
-
+    <div class="scrollArea">
     <ul slot="content" class="tagList">
       <li v-for="tag in filteredList" :key="tag.id"
-          :class="{selected:selectedTags.indexOf(tag) >= 0}"
-          @click="select(tag)">
-        <div class="icon-wrapper">
+          >
+        <div class="icon-wrapper"
+             :class="{selected:selectedTags.indexOf(tag) >= 0}"
+             @click="select(tag)">
+        <div class="svg-wrapper">
           <Icon :name="tag.name"></Icon>
         </div>
         {{ tag.name }}
+        </div>
       </li>
     </ul>
+    </div>
   </div>
 </template>
 
@@ -40,6 +44,7 @@ export default class Categories extends Vue {
       this.selectedTags.push(tag);
     }
     this.$emit('update:value', this.selectedTags);
+    console.log('hi');
 
   }
 };
@@ -51,59 +56,68 @@ p {
   padding: 10px 20px;
   font-weight: bold;
 }
-
-.tagList {
-  height:50vh;
+.scrollArea{
+  height: 30vh;
   overflow: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  padding: 0 10px;
 
-  > li {
-    border: 1px solid lightgray;
-    border-radius: 5px;
+  .tagList {
+    padding: 0 10px;
+    //border: 1px solid green;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    align-items:start;
 
-    svg {
-      margin: 8px;
-      height: 30px;
-      width: 30px;
-    }
-
-    &.selected {
-      box-shadow: 0 0 2px lightgray;
-      background: #FEF0EB;
-
+    > li {
+      //border: 1px solid blue;
+      width: 33.333%;
+      height: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .icon-wrapper{
+        border: 1px solid lightgray;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        width: 80%;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &.selected {
+          box-shadow: 0 0 2px lightgray;
+          background: #FEF0EB;
+          svg {
+            animation: shake 0.3s linear;
+          }
+        }
+      }
       svg {
-        animation: shake 0.3s linear;
+        margin: 8px;
+        height: 40px;
+        width: 40px;
       }
-    }
-
-    @keyframes shake {
-      0% {
-        transform: rotate(0deg);
-      }
-      20% {
-        transform: rotate(20deg);
-      }
-      40% {
-        transform: rotate(0deg);
-      }
-      80%{
-        transform: rotate(-20deg);
-      }
-      100% {
-        transform:rotate(0deg);
+      @keyframes shake {
+        0% {
+          transform: rotate(0deg);
+        }
+        20% {
+          transform: rotate(20deg);
+        }
+        40% {
+          transform: rotate(0deg);
+        }
+        80%{
+          transform: rotate(-20deg);
+        }
+        100% {
+          transform:rotate(0deg);
+        }
       }
     }
   }
 }
+
 
 
 </style>
