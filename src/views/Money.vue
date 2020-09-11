@@ -6,8 +6,8 @@
       <div class="parts-wrapper">
       <Date/>
       <Notes placeholder="在这里输入备注" @update:value="record.notes = $event"/>
-      <Number :value.sync="record.amount" :type-text="type" />
-      <Categories @update:value="record.category = $event" :type-text="type"/>
+      <Number :value.sync="record.amount" :type="type" />
+      <Categories @update:value="record.category = $event" :type="type"/>
       </div>
       <div class="-button-wrapper">
         <button @click="saveRecord">确定</button>

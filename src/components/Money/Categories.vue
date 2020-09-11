@@ -3,12 +3,11 @@
     <p slot="title">分类</p>
 
     <ul slot="content" class="tagList">
-      <li v-for="tag in tagList" :key="tag.id"
+      <li v-for="tag in filteredList" :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag) >= 0}"
           @click="select(tag)">
         <div class="icon-wrapper">
-          <Icon v-if="typeText === '-'" :name="tag.name"></Icon>
-          <Icon v-else :name="tag.name"></Icon>
+          <Icon :name="tag.name"></Icon>
         </div>
         {{ tag.name }}
       </li>
@@ -27,10 +26,10 @@ import Icon from '@/components/Icon.vue';
 @Component({components: {Icon, Parts}})
 export default class Categories extends Vue {
   selectedTags: string[] = [];
-  @Prop() typeText!:string
+  @Prop() type!:string
 
-  get tagList() {
-    return this.$store.state.tagList;
+  get filteredList() {
+    return this.$store.state.tagList.filter((tag:Tag) =>tag.type === this.type )
   }
 
   select(tag: string) {
@@ -58,6 +57,7 @@ p {
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   padding: 0 10px;
