@@ -31,7 +31,7 @@ import Icon from '@/components/Icon.vue';
 export default class Categories extends Vue {
   selectedTags: string[] = [];
   @Prop() type!:string
-//better 如何一进入页面就有默认selected
+//better 一进入页面就有默认selected
   get filteredList() {
     return this.$store.state.tagList.filter((tag:Tag) =>tag.type === this.type )
   }
