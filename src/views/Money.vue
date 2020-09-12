@@ -1,13 +1,16 @@
 <template slot="header">
 
   <Layout>
-    <Tabs slot="header" :data-source="recordTypeList" :value.sync="type" />
+    <Tabs slot="header" :data-source="recordTypeList" :value.sync="record.type" />
     <div slot="body" class="body">
+      {{record}}
       <div class="parts-wrapper">
-      <Date/>
-      <Notes placeholder="在这里输入备注" @update:value="record.notes = $event"/>
-      <Number :value.sync="record.amount" :type="type" />
-      <Categories @update:value="record.category = $event" :type="type"/>
+        <DatePicker/>
+        <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
+        <Number
+            :value.sync="record.amount"
+            :type="record.type" />
+        <Categories @update:value="record.category = $event" :type="record.type"/>
       </div>
       <div class="-button-wrapper">
         <button @click="saveRecord">确定</button>
@@ -40,7 +43,6 @@ export default class Money extends Vue {
   }
 
   recordTypeList = recordTypeList;
-  type = '-';
   record: RecordItem = {
     category: [], notes: '', type: '-', amount: 0
   };
