@@ -6,10 +6,11 @@
       <a-input type="number" pattern="\d*"
                onfocus="if(value==='0'){value=''}"
                onblur="if(value===''){value='0'}"
-               :value="0 |hey"
+               v-model="init"
+               @input="hey"
       />
 
-<!--      better 添加数字逗号-->
+      <!--      better 添加数字逗号-->
     </label>
   </Parts>
 </template>
@@ -21,21 +22,24 @@ import Parts from '@/components/Money/Parts.vue';
 import {Component, Prop} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
 
-@Component({components: {Icon, Parts},
-    filters:{hey: function (value:number){
-        console.log('here');
-        if(!value){
-    return '0'
-  }
-  return value.toString().replace( /([0-9]+?)(?=(?:[0-9]{3})+$)/g , '$1,' );
-}}})
+@Component({
+  components: {Icon, Parts},
+})
 export default class Number extends Vue {
+
   @Prop() type!: string
   @Prop() readonly value!: number
 
-
+  init=0;
   output = this.value.toString();
-
+    hey(value: number) {
+      let newNumber = value.toString().replace(/([0-9]+?)(?=(?:[0-9]{3})+$)/g, '1,');
+      console.log(newNumber);
+      if (!value) {
+    return '0'
+  }
+      return newNumber
+    }
   get recordTypeList() {
     return this.$store.state.recordTypeList;
   }
