@@ -3,10 +3,11 @@
     <p slot="title">分类</p>
     <div class="scrollArea">
     <ul slot="content" class="tagList">
-      <li v-for="tag in filteredList" :key="tag.id"
+      <li v-for="(tag,index) in filteredList" :key="index"
+
           >
         <div class="icon-wrapper"
-             :class="{selected:selectedTags.indexOf(tag) >= 0}"
+             :class="active === index ? 'selected':'' || {selected:selectedTags.indexOf(tag) >= 0}"
              @click="select(tag)">
         <div class="svg-wrapper">
           <Icon :name="tag.name"></Icon>
@@ -22,30 +23,45 @@
 <script lang="ts">
 
 
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
 
 @Component({components: {Icon, Parts}})
 export default class Categories extends Vue {
-  selectedTags: string[] = [];
+  selectedTags:string[]=[];
+  active:number = 0;
   @Prop() type!:string
 //better 一进入页面就有默认selected
+  created(){
+    if(this.type === "+"){
+      this.$emit('update:value', [this.$store.state.tagList[11]])
+    }
+    else{
+      this.$emit('update:value', [this.$store.state.tagList[0]])
+    }  }
+  @Watch('type')
+  updateCategory(){
+    if(this.type === "+"){
+      this.$emit('update:value', [this.$store.state.tagList[11]])
+    }
+    else{
+      this.$emit('update:value', [this.$store.state.tagList[0]])
+    }
+  }
   get filteredList() {
     return this.$store.state.tagList.filter((tag:Tag) =>tag.type === this.type )
   }
-  select(tag: string) {
-    console.log(tag);
+  select(tag) {
     if (this.selectedTags === []) {
-      this.selectedTags.push(tag);
-      console.log(this.selectedTags);
+      this.selectedTags.push();
     } else {
       this.selectedTags = [];
       this.selectedTags.push(tag);
+      console.log(this.selectedTags);
     }
     this.$emit('update:value', this.selectedTags);
-
   }
 };
 </script>

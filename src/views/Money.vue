@@ -16,7 +16,7 @@
                     :type="record.type"/>
       </div>
       <div class="-button-wrapper">
-        <button @click="saveRecord">确定</button>
+        <button @click="saveRecord" >确定</button>
       </div>
     </div>
   </Layout>
@@ -53,6 +53,7 @@ export default class Money extends Vue {
   saveRecord() {
     this.$store.commit('createRecord', this.record);
     console.log(this.record.type);
+    window.alert('已保存')
   }
 };
 </script>
@@ -74,6 +75,7 @@ export default class Money extends Vue {
     justify-content: center;
     align-items: center;
     button {
+      cursor: pointer;
       width: 80%;
       background: $color-highlight;
       border: none;
