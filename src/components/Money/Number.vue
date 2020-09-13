@@ -33,8 +33,8 @@ export default class Number extends Vue {
     return this.$store.state.recordTypeList;
   }
   @Watch('inputNum')
-addComma(event:string){
-    this.$emit('update:value',parseInt(event))
+addComma(){
+    this.$emit('update:value',parseInt(this.inputNum))
     // console.log(event);
     // this.inputNum = event.replace(/(?=(\B\d{3})+$)/g, ',')
 }

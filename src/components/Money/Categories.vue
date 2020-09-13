@@ -7,7 +7,7 @@
 
           >
         <div class="icon-wrapper"
-             :class="active === index ? 'selected':'' || {selected:selectedTags.indexOf(tag) >= 0}"
+             :class="{selected:activeIndex === index || selectedTags.indexOf(tag)>=0 } "
              @click="select(tag)">
         <div class="svg-wrapper">
           <Icon :name="tag.name"></Icon>
@@ -31,37 +31,39 @@ import Icon from '@/components/Icon.vue';
 @Component({components: {Icon, Parts}})
 export default class Categories extends Vue {
   selectedTags:string[]=[];
-  active:number = 0;
+  activeIndex:number = 0;
   @Prop() type!:string
-//better 一进入页面就有默认selected
+//better 重复
+
+  send(index:number){
+    return this.$emit('update:value',[this.$store.state.tagList[index]])
+  }
   created(){
     if(this.type === "+"){
-      this.$emit('update:value', [this.$store.state.tagList[11]])
+      this.send(11)
     }
     else{
-      this.$emit('update:value', [this.$store.state.tagList[0]])
+      this.send(0)
     }  }
   @Watch('type')
   updateCategory(){
     if(this.type === "+"){
-      this.$emit('update:value', [this.$store.state.tagList[11]])
+      this.send(11)
     }
     else{
-      this.$emit('update:value', [this.$store.state.tagList[0]])
+      this.send(0)
     }
   }
   get filteredList() {
     return this.$store.state.tagList.filter((tag:Tag) =>tag.type === this.type )
   }
-  select(tag) {
-    if (this.selectedTags === []) {
-      this.selectedTags.push();
-    } else {
+  select(tag:string) {
+    if(this.selectedTags.length !== 0){
       this.selectedTags = [];
-      this.selectedTags.push(tag);
-      console.log(this.selectedTags);
     }
-    this.$emit('update:value', this.selectedTags);
+    this.selectedTags.push(tag);
+    console.log(this.selectedTags);
+    this.$emit('update:value',this.selectedTags)
   }
 };
 </script>
