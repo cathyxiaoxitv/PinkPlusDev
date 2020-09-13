@@ -39,6 +39,7 @@ export default class Categories extends Vue {
     return this.$emit('update:value',[this.$store.state.tagList[index]])
   }
   created(){
+    console.log(this.selectedTags);
     if(this.type === "+"){
       this.send(11)
     }
@@ -49,9 +50,11 @@ export default class Categories extends Vue {
   updateCategory(){
     if(this.type === "+"){
       this.send(11)
+      this.selectedTags = []
     }
     else{
       this.send(0)
+      this.selectedTags = []
     }
   }
   get filteredList() {
