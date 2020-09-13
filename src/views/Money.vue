@@ -7,7 +7,7 @@
     <div slot="body" class="body">
       {{record}}
       <div class="parts-wrapper">
-        <Date/>
+        <Date @update:value = "record.createdAt = $event"/>
         <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
         <Number
             :value.sync="record.amount"
@@ -47,7 +47,7 @@ export default class Money extends Vue {
 
   recordTypeList = recordTypeList;
   record: RecordItem = {
-    category: [], notes: '', type: '-', amount: 0
+    category: [], notes: '', type: '-', amount: 0,createdAt:''
   };
 
   saveRecord() {
