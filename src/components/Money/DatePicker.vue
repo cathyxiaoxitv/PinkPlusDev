@@ -21,9 +21,10 @@ import Icon from '@/components/Icon.vue';
 })
 export default class DatePicker extends Vue {
   moment = moment;
+
   getCurrentDate() {
-    return new
-    Date().toLocaleDateString();
+    this.$emit('update:value',new Date().toISOString().substring(0,10))
+    return new Date().toLocaleDateString();
   };
 
   setDate(moment:string){
