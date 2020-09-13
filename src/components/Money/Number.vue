@@ -34,7 +34,9 @@ export default class Number extends Vue {
   }
   @Watch('inputNum')
 addComma(event:string){
-  this.inputNum = event.replace(/(?=(\B\d{3})+$)/g, ',')
+    this.$emit('update:value',parseInt(event))
+    // console.log(event);
+    // this.inputNum = event.replace(/(?=(\B\d{3})+$)/g, ',')
 }
 
 

@@ -2,7 +2,10 @@
   <Parts>
     <p slot="title">日期</p>
       <div slot="content">
-        <a-date-picker placeholder="选择日期" :defaultValue="moment(getCurrentDate(), 'YYYY-MM-DD')" />
+        <a-date-picker placeholder="选择日期"
+                       :defaultValue="moment(getCurrentDate(), 'YYYY-MM-DD')"
+                        @change="setDate"
+        />
       </div>
   </Parts>
 </template>
@@ -22,8 +25,10 @@ export default class DatePicker extends Vue {
     return new
     Date().toLocaleDateString();
   };
-  onChange(){
-    console.log('HI');
+
+  setDate(moment:string){
+    const selectedDate = moment.format().substring(0,10);
+    this.$emit('update:value',selectedDate)
   }
 
 
