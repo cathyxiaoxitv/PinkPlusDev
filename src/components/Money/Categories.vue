@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <p slot="title">分类 {{selectedTag}}</p>
+    <p slot="title">分类</p>
     <div class="scrollArea">
 
       <ul slot="content" class="tagList">
@@ -10,9 +10,7 @@
           <div class="icon-wrapper"
                :class="{selected:tag.name === selectedTag.name } "
                @click="select(tag)">
-            <div class="svg-wrapper">
               <Icon :name="tag.name"></Icon>
-            </div>
             {{ tag.name }}
           </div>
         </li>
@@ -38,11 +36,6 @@ export default class Categories extends Vue {
 
   get filteredList() {
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)
-  }
-
-
-  send(index: number) {
-    return this.$emit('update:value', [this.$store.state.tagList[index]])
   }
 
   @Watch('type')
@@ -75,13 +68,13 @@ p {
 
   .tagList {
     padding: 0 10px;
-    //border: 1px solid green;
+    border: 1px solid green;
     display: flex;
     flex-wrap: wrap;
     align-items: start;
 
     > li {
-      //border: 1px solid blue;
+      border: 1px solid blue;
       width: 33.333%;
       height: 20%;
       display: flex;
@@ -108,7 +101,6 @@ p {
           }
         }
       }
-
       svg {
         margin: 8px;
         height: 40px;

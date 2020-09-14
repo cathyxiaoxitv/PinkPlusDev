@@ -5,15 +5,14 @@
           :data-source="recordTypeList"
           :value.sync="record.type" />
     <div slot="body" class="body">
-      {{record}}
       <div class="parts-wrapper">
         <Date @update:value = "record.createdAt = $event"/>
         <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
         <Number
-            :value.sync="record.amount"
+            :amount.sync="record.amount"
             :type="record.type" />
         <Categories :type="record.type"
-                    :selected-tag.sync="record.category"
+                    :selectedTag.sync="record.category"
         />
       </div>
       <div class="-button-wrapper">
@@ -69,11 +68,11 @@ export default class Money extends Vue {
   //  display: none;
   //}
 .parts-wrapper{
-  height: 85%;
+  height: 70%;
   overflow: auto;
 }
   .-button-wrapper {
-    height: 15%;
+    height: 30%;
     display: flex;
     justify-content: center;
     align-items: center;

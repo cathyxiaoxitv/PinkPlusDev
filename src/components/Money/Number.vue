@@ -3,11 +3,13 @@
     <p slot="title" v-if="type === '-'">支出</p>
     <p slot="title" v-else>收入</p>
     <label slot="content">
-      <a-input type="number" pattern="\d*"
+      <a-input type="text"
+               pattern="\d*"
                onfocus="if(value==='0'){value=''}"
                onblur="if(value===''){value='0'}"
-               v-model="inputNum"
+               v-model="price"
       />
+
     </label>
   </Parts>
 </template>
@@ -26,18 +28,20 @@ import Icon from '@/components/Icon.vue';
 
 export default class Number extends Vue {
   @Prop() type!: string
-  @Prop() readonly value!: number
-  inputNum = this.value.toString();
+
 
   get recordTypeList() {
     return this.$store.state.recordTypeList;
   }
-  @Watch('inputNum')
-addComma(){
-    this.$emit('update:value',parseInt(this.inputNum))
-    // console.log(event);
-    // this.inputNum = event.replace(/(?=(\B\d{3})+$)/g, ',')
-}
+  price:string = '0';
+  @Watch('price')
+    valueChange(newValue:string){
+    const result = newValue.replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.$nextTick(function(){this.price = result})
+    const number = parseFloat(result.replace(/,/g, ''));
+    this.$emit('update:amount',number)
+  }
 
 
 };

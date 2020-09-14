@@ -20,7 +20,8 @@ export default class Notes extends Vue{
   @Prop({default:''})readonly value!:string;
   @Prop()placeholder?:string;
   onValueChanged(event:InputEvent){
-      const output = event.currentTarget.value;
+    const input = (event.currentTarget as HTMLInputElement)
+      const output = input.value;
       this.$emit('update:value',output)
   }
 };
