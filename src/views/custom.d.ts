@@ -4,7 +4,6 @@ type RootState = {
 }
 
 type Tag = {
-  id:number,
   name: string,
   type:string
 }
@@ -14,5 +13,5 @@ type RecordItem = {
   createdAt?: string
   notes: string
   amount: number
-  category: string[]
+  category: Tag
 }

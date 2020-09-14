@@ -4,11 +4,9 @@ import clone from '@/lib/clone';
 
 Vue.use(Vuex);
 
-let id = 0
 
 const createTag = (name: string, type: string) => {
-    id += 1
-    return {id: id, name: name, type: type}
+    return { name: name, type: type}
 
 }
 

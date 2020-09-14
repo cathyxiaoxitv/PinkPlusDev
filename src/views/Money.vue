@@ -12,8 +12,9 @@
         <Number
             :value.sync="record.amount"
             :type="record.type" />
-        <Categories @update:value="record.category = $event"
-                    :type="record.type"/>
+        <Categories :type="record.type"
+                    :selected-tag.sync="record.category"
+        />
       </div>
       <div class="-button-wrapper">
         <button @click="saveRecord" >确定</button>
@@ -46,9 +47,11 @@ export default class Money extends Vue {
   }
 
   recordTypeList = recordTypeList;
-  record: RecordItem = {
-    category: [], notes: '', type: '-', amount: 0,createdAt:''
-  };
+  record: RecordItem = this.initRecord();
+
+  initRecord():RecordItem{
+    return {category: {name: '饮食费', type: '-'}, notes: '', type: '-', amount: 0,createdAt:''};
+  }
 
   saveRecord() {
     this.$store.commit('createRecord', this.record);
