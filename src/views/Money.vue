@@ -8,7 +8,7 @@
     <div slot="body" class="body">
       <div class="parts-wrapper">
         {{record}}
-        <Date @update:value = "record.createdAt = $event"/>
+        <DatePicker @update:value = "record.createdAt = $event"/>
         <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
         <Number
             :amount.sync="record.amount"
@@ -18,7 +18,7 @@
         />
       </div>
       <div class="-button-wrapper">
-        <a-button @click='confirm' centered>确定</a-button>
+        <a-button @click='confirm'>确定</a-button>
       </div>
     </div>
   </Layout>
@@ -36,10 +36,10 @@ import {Component} from 'vue-property-decorator';
 import Parts from '@/components/Money/Parts.vue';
 import Categories from '@/components/Money/Categories.vue';
 import recordTypeList from '@/constants/recordTypeList';
-import Date from '@/components/Money/DatePicker.vue';
+import DatePicker from '@/components/Money/DatePicker.vue';
 
 @Component({
-  components: {Date, Categories, Number, Notes, Parts, Tabs}
+  components: {DatePicker, Categories, Number, Notes, Parts, Tabs}
 })
 
 export default class Money extends Vue {
@@ -70,6 +70,7 @@ export default class Money extends Vue {
     } else {
       this.$store.commit('createRecord', this.record);
         this.$message.success({content: '已保存',duration:1});
+
     }
   }
 }

@@ -10,7 +10,8 @@
 export default {
   methods: {
     onPanelChange(value, mode) {
-      console.log(value, mode);
+      console.log(value);
+      console.log(mode);
     },
   },
 };

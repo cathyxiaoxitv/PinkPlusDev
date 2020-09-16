@@ -2,6 +2,7 @@
   <Layout>
     <Tabs slot="header" class-prefix="interval" :data-source="array1" :value.sync="interval"/>
     <div slot="body">
+      <Date @update:value = "record.createdAt = $event"/>
     </div>
   </Layout>
 </template>
@@ -12,6 +13,7 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
+import Date from '@/components/Money/DatePicker'
 
 
 @Component({
