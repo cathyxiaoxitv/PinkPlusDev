@@ -4,8 +4,10 @@
     <Tabs slot="header"
           :data-source="recordTypeList"
           :value.sync="record.type" />
+
     <div slot="body" class="body">
       <div class="parts-wrapper">
+        {{record}}
         <Date @update:value = "record.createdAt = $event"/>
         <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
         <Number
@@ -16,7 +18,7 @@
         />
       </div>
       <div class="-button-wrapper">
-        <button @click="saveRecord" >确定</button>
+        <a-button @click='confirm' centered>确定</a-button>
       </div>
     </div>
   </Layout>
@@ -48,16 +50,29 @@ export default class Money extends Vue {
   recordTypeList = recordTypeList;
   record: RecordItem = this.initRecord();
 
-  initRecord():RecordItem{
-    return {category: {name: '饮食费', type: '-'}, notes: '', type: '-', amount: 0,createdAt:''};
+  initRecord(): RecordItem {
+    return {category: {name: '饮食费', type: '-'}, notes: '', type: '-', amount: 0, createdAt: ''};
   }
 
-  saveRecord() {
-    this.$store.commit('createRecord', this.record);
-    console.log(this.record.type);
-    window.alert('已保存')
+  confirm() {
+    const _this= this;
+    if (this.record.amount === 0) {
+      this.$confirm({
+        content: '金额为0，确定吗？',
+        okText: '确定',
+        cancelText: "取消",
+        centered:true,
+        onOk(){
+          _this.$store.commit('createRecord',_this.record)
+          _this.$message.success({content: '已保存',duration:1});
+        }
+      })
+    } else {
+      this.$store.commit('createRecord', this.record);
+        this.$message.success({content: '已保存',duration:1});
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

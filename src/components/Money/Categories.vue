@@ -68,13 +68,11 @@ p {
 
   .tagList {
     padding: 0 10px;
-    border: 1px solid green;
     display: flex;
     flex-wrap: wrap;
     align-items: start;
 
     > li {
-      border: 1px solid blue;
       width: 33.333%;
       height: 20%;
       display: flex;
