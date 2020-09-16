@@ -33,7 +33,7 @@ const store = new Vuex.Store({
         recordList: []
     } as RootState,
     mutations: {
-        fetchRecords(state) {
+         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
         },
         createRecord(state, record) {
