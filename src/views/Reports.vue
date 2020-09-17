@@ -15,7 +15,7 @@
                 </div>
                 <div class="money-wrapper"
                      :class="{plus:item.type === '+'}">
-                  {{addComma(item.amount.toString())}}
+                  {{ showAmount(item) }}
                 </div>
               </li>
             </ol>
@@ -64,9 +64,15 @@ export default class Reports extends Vue {
     return hashTable;
   }
 
-  addComma(amount:string){
-    return amount.replace(/\D/g, "")
+  showAmount(item:RecordItem){
+    let commaAmount = item.amount.toString().replace(/\D/g, "")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if(item.type === '+'){
+      return '+'+commaAmount
+    }else{
+      return '-'+commaAmount
+    }
+
   }
 };
 </script>
