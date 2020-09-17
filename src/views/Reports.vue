@@ -17,7 +17,7 @@
                 <div class="icon-wrapper">
                   <Icon :name="item.category.name" class="icon"></Icon>
                   <span class="tag">{{item.category.name}}</span>
-                  <div class="notes">({{item.notes}})</div>
+                  <div class="notes">{{showNote(item)}}</div>
                 </div>
                 <div class="money-wrapper">
                   {{ showAmount(item) }}
@@ -90,7 +90,11 @@ addComma(amount:number){
   return amount.toString().replace(/\D/g, "")
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
+showNote(item:RecordItem){
+    if(item.notes!==''){
+      return '('+item.notes+')'
+    }
+}
   showAmount(item:RecordItem){
     let commaAmount = this.addComma(item.amount)
     if(item.type === '+'){
@@ -107,7 +111,7 @@ addComma(amount:number){
   padding: 0 10px;
   display: flex;
   justify-content: space-between;
-  //border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
 .title {
@@ -124,28 +128,24 @@ addComma(amount:number){
 }
 .record{
   @extend %item;
-  border: 1px solid green;
   min-height: 30px;
   align-items: center;
 
   .money-wrapper{
-    border: 1px solid red;
+    font-size: x-small;
   }
 
   .icon-wrapper{
-    border: 1px solid blue;
     display: flex;
     justify-content: center;
     align-items: center;
     .icon{
-      padding: 2px;
+      padding: 5px;
       margin-right:5px;
-      border: 1px solid green;
       width: 35px;
       height:35px;
     }
     .tag{
-      border: 1px solid pink;
       font-weight: bold;
     }
     .notes{
