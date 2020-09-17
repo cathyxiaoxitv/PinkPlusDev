@@ -70,8 +70,8 @@ export default class Money extends Vue {
     } else {
       this.$store.commit('createRecord', this.record);
         this.$message.success({content: '已保存',duration:1});
-
     }
+    // this.record.amount = '0'
   }
 }
 </script>
@@ -79,7 +79,6 @@ export default class Money extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .body{
-  border: 1px solid pink;
   height: 100%;
   //::-webkit-scrollbar{
   //  display: none;

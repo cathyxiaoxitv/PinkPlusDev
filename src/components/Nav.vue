@@ -6,7 +6,7 @@
     </router-link>
     <router-link to="/calendar" class="item" active-class="selected">
       <Icon name="calendar"/>
-      日历
+      明细
     </router-link>
     <router-link to="/reports" class="item" active-class="selected">
       <Icon name="reports"/>

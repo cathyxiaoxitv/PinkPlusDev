@@ -2,31 +2,6 @@
   <Layout>
     <Tabs slot="header" class-prefix="interval" :data-source="array1" :value.sync="interval"/>
     <div slot="body">
-      <div>
-        <ol>
-          <li v-for="(group,index) in result" :key="index">
-            <h3 class="title">
-              <span>{{group.title}}</span>
-              <span
-                  class="amount"
-                  :class="{positive:showTotal(group).substring(0,1)==='+'}"
-              >{{ showTotal(group)}}</span>
-            </h3>
-            <ol>
-              <li v-for="item in group.item" :key="item.id" class="record">
-                <div class="icon-wrapper">
-                  <Icon :name="item.category.name" class="icon"></Icon>
-                  <span class="tag">{{item.category.name}}</span>
-                  <div class="notes">{{showNote(item)}}</div>
-                </div>
-                <div class="money-wrapper">
-                  {{ showAmount(item) }}
-                </div>
-              </li>
-            </ol>
-          </li>
-        </ol>
-      </div>
     </div>
   </Layout>
 </template>
@@ -38,7 +13,7 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 
-type HashTableValue = { title: string, item:RecordItem[]}
+
 
 @Component({
   components: {Tabs}
