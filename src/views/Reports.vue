@@ -5,7 +5,13 @@
       <div>
         <ol>
           <li v-for="(group,index) in result" :key="index">
-            <h3 class="title">{{ group.title}}</h3>
+            <h3 class="title">
+              <span>{{group.title}}</span>
+              <span
+                  class="amount"
+                  :class="{positive:showTotal(group).substring(0,1)==='+'}"
+              >{{ showTotal(group)}}</span>
+            </h3>
             <ol>
               <li v-for="item in group.item" :key="item.id" class="record">
                 <div class="icon-wrapper">
@@ -13,8 +19,7 @@
                   <span class="tag">{{item.category.name}}</span>
                   <div class="notes">({{item.notes}})</div>
                 </div>
-                <div class="money-wrapper"
-                     :class="{plus:item.type === '+'}">
+                <div class="money-wrapper">
                   {{ showAmount(item) }}
                 </div>
               </li>
@@ -33,6 +38,7 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 
+type HashTableValue = { title: string, item:RecordItem[]}
 
 @Component({
   components: {Tabs}
@@ -52,7 +58,6 @@ export default class Reports extends Vue {
 
   get result() {
     const {recordList} = this;
-    type HashTableValue = { title: string, item:RecordItem[]}
     const hashTable: { [key: string]: HashTableValue } = {};
     //声明这个hashTable的key是字符串，value是HashTableValue类型
     for (let i = 0; i < recordList.length; i++) {
@@ -60,19 +65,39 @@ export default class Reports extends Vue {
       hashTable[date] = hashTable[date] || {title: date, item: []}
       hashTable[date].item.push(recordList[i])
     }
-    console.log(hashTable);
     return hashTable;
   }
+showTotal(group:HashTableValue){
+    let total = 0
+    let item:RecordItem
+  for(item of group.item){
+    if(item.type ==='-'){
+      total -= item.amount
+    }
+    else{
+      total += item.amount
+    }
+  }
+  if(total>0){
+    return '+'+this.addComma(total)
+  }else if(total<0){
+    return '-'+this.addComma(total)
+  }else{
+    return '0'
+  }
+}
+addComma(amount:number){
+  return amount.toString().replace(/\D/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
   showAmount(item:RecordItem){
-    let commaAmount = item.amount.toString().replace(/\D/g, "")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    let commaAmount = this.addComma(item.amount)
     if(item.type === '+'){
       return '+'+commaAmount
     }else{
       return '-'+commaAmount
     }
-
   }
 };
 </script>
@@ -80,6 +105,8 @@ export default class Reports extends Vue {
 <style scoped lang="scss">
 %item{
   padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
   //border-bottom: 1px solid lightgray;
 }
 
@@ -87,22 +114,22 @@ export default class Reports extends Vue {
   @extend %item;
   min-height: 20px;
   background: #F4F5F6;
+  .amount{
+    color: red;
+    &.positive{
+      color:green
+    }
+  }
+
 }
 .record{
+  @extend %item;
   border: 1px solid green;
   min-height: 30px;
-  @extend %item;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 5px;
+
   .money-wrapper{
     border: 1px solid red;
-    color: red;
-    &.plus{
-      color: green;
-    }
-
   }
 
   .icon-wrapper{
@@ -111,10 +138,11 @@ export default class Reports extends Vue {
     justify-content: center;
     align-items: center;
     .icon{
-      margin: 0 5px;
+      padding: 2px;
+      margin-right:5px;
       border: 1px solid green;
-      width: 30px;
-      height:30px;
+      width: 35px;
+      height:35px;
     }
     .tag{
       border: 1px solid pink;
