@@ -27,7 +27,7 @@ export default class DatePicker extends Vue {
     return new Date().toLocaleDateString();
   };
 
-  selectDate(moment:string){
+  selectDate(moment){
     const selectedDate = moment.format().substring(0,10);
     this.$emit('update:value',selectedDate)
   }

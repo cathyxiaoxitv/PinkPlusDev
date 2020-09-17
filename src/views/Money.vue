@@ -79,6 +79,7 @@ export default class Money extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .body{
+  border: 1px solid pink;
   height: 100%;
   //::-webkit-scrollbar{
   //  display: none;

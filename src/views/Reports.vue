@@ -2,16 +2,20 @@
   <Layout>
     <Tabs slot="header" class-prefix="interval" :data-source="array1" :value.sync="interval"/>
     <div slot="body">
-      <a-month-picker/>
       <div>
         <ol>
           <li v-for="(group,index) in result" :key="index">
-            <h3>{{ group.title}}</h3>
+            <h3 class="title">{{ group.title}}</h3>
             <ol>
-              <li v-for="item in group.item" :key="item.id">
-                {{item.amount}}
-                {{item.createdAt}}
-                {{item.type}}
+
+              <li v-for="item in group.item" :key="item.id" class="record">
+                <div class="icon-wrapper">
+                  <Icon :name="item.category.name"></Icon>
+                  {{item.category.name}}</div>
+                <div class="money-wrapper">
+                  {{item.type}}
+                  {{addComma(item.amount.toString())}}
+                </div>
               </li>
             </ol>
           </li>
@@ -27,7 +31,6 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
-import recordTypeList from "@/constants/recordTypeList";
 
 
 @Component({
@@ -57,12 +60,37 @@ export default class Reports extends Vue {
     }
     console.log(hashTable);
     return hashTable;
-
-
+  }
+  addComma(amount:string){
+    return amount.replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 };
 </script>
 
-<style scoped lang="'scss">
+<style scoped lang="scss">
+%item{
+  padding: 0 10px;
+  //border-bottom: 1px solid lightgray;
+
+
+}
+.title {
+  @extend %item;
+  min-height: 20px;
+  background: #F4F5F6;
+}
+.record{
+  min-height: 30px;
+  @extend %item;
+  display: flex;
+  justify-content: space-between;
+}
+.money-wrapper{
+  border: 1px solid red;
+}
+.icon-wrapper{
+  border: 1px solid blue;
+}
 
 </style>

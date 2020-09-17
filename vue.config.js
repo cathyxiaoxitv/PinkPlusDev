@@ -5,8 +5,6 @@ module.exports = {
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons')
 
-    config.resolve.alias.set('numeric-keyboard$', 'numeric-keyboard/dist/numeric_keyboard.vue.js')
-
     config.module
       .rule('svg-sprite')
       .test(/\.svg$/)
