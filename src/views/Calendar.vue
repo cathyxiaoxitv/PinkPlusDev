@@ -71,8 +71,9 @@ export default class Reports extends Vue {
     let total = 0
     let item:RecordItem
     for(item of group.item){
-      if(item.type ==='-'){
+      if(item.type ==='-') {
         total -= item.amount
+        console.log(typeof total)
       }
       else{
         total += item.amount

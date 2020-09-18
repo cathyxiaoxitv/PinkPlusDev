@@ -11,7 +11,7 @@
         <DatePicker @update:value = "record.createdAt = $event"/>
         <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
         <Number
-            :amount.sync="record.amount"
+            :value.sync="record.amount"
             :type="record.type" />
         <Categories :type="record.type"
                     :selectedTag.sync="record.category"
@@ -71,7 +71,8 @@ export default class Money extends Vue {
       this.$store.commit('createRecord', this.record);
         this.$message.success({content: '已保存',duration:1});
     }
-    // this.record.amount = '0'
+    this.record.notes = ''
+    this.record.amount = 0
   }
 }
 </script>

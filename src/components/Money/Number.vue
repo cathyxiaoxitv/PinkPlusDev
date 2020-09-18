@@ -7,9 +7,9 @@
                pattern="\d*"
                onfocus="if(value==='0'){value=''}"
                onblur="if(value===''){value='0'}"
-               v-model="price"
+               :value="commaAmount"
+               @input="onValueChanged"
       />
-
     </label>
   </Parts>
 </template>
@@ -18,7 +18,7 @@
 import Vue from 'vue';
 
 import Parts from '@/components/Money/Parts.vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
 
 @Component({
@@ -28,22 +28,23 @@ import Icon from '@/components/Icon.vue';
 
 export default class Number extends Vue {
   @Prop() type!: string
+  @Prop() value!: number
 
 
   get recordTypeList() {
     return this.$store.state.recordTypeList;
   }
-  price:string = '0';
-  @Watch('price')
-    valueChange(newValue:string){
-    const result = newValue.replace(/\D/g, "")
+
+  get commaAmount(){
+    return this.value.toString().replace(/\D/g, "")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.$nextTick(function(){this.price = result})
-    const number = parseFloat(result.replace(/,/g, ''));
-    this.$emit('update:amount',number)
   }
 
-
+  onValueChanged(event:InputEvent){
+    const input = (event.currentTarget as HTMLInputElement)
+    const output = parseFloat(input.value.replace(/,/g, ''));
+    this.$emit('update:value',output)
+  }
 };
 </script>
 
