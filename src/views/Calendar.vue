@@ -1,6 +1,7 @@
 <template>
   <Layout>
-    <p slot="header" class="mainTitle">明细</p>
+    <div slot="header" class="mainTitle">
+      <ChooseMonth/></div>
     <div slot="body">
       <div>
         <ol>
@@ -40,11 +41,12 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
+import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 
 type HashTableValue = { title: string, item:RecordItem[]}
 
 @Component({
-  components: {Tabs}
+  components: {ChooseMonth, Tabs}
 })
 export default class Reports extends Vue {
 
@@ -121,7 +123,13 @@ export default class Reports extends Vue {
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
 }
-
+.month-wrapper{
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
 .title {
   @extend %item;
   min-height: 20px;
