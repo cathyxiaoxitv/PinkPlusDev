@@ -1,7 +1,8 @@
 <template>
   <Layout>
     <div slot="header" class="mainTitle">
-      <ChooseMonth/></div>
+      <ChooseMonth @update:value = "month= $event"/>
+    </div>
     <div slot="body">
       <div>
         <ol>
@@ -44,12 +45,13 @@ import Tabs from '@/components/Money/Tabs.vue';
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 
 type HashTableValue = { title: string, item:RecordItem[]}
+type hashTable = { [key: string]: HashTableValue }
 
 @Component({
   components: {ChooseMonth, Tabs}
 })
 export default class Reports extends Vue {
-
+  month = ''
   beforeCreate() {
     this.$store.commit('fetchRecords')
   }
@@ -60,22 +62,24 @@ export default class Reports extends Vue {
 
   get result() {
     const {recordList} = this;
-    const hashTable: { [key: string]: HashTableValue } = {};
+    const totalTable: hashTable = {};
     //声明这个hashTable的key是字符串，value是HashTableValue类型
     for (let i = 0; i < recordList.length; i++) {
       const date = recordList[i].createdAt!
-      hashTable[date] = hashTable[date] || {title: date, item: []}
-      hashTable[date].item.push(recordList[i])
+      if(date.indexOf(this.month)> -1){
+        totalTable[date] = totalTable[date] || {title: date, item: []}
+        totalTable[date].item.push(recordList[i])
+      }
     }
-    return hashTable;
+    return totalTable
   }
+
   showTotal(group:HashTableValue){
     let total = 0
     let item:RecordItem
     for(item of group.item){
       if(item.type ==='-') {
         total -= item.amount
-        console.log(typeof total)
       }
       else{
         total += item.amount

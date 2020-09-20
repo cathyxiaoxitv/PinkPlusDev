@@ -38,7 +38,6 @@ const store = new Vuex.Store({
         },
         createRecord(state, record) {
             const clonedRecord: RecordItem = clone(record);
-            console.log(record);
             state.recordList.push(clonedRecord);
             store.commit('saveRecords');
         },
