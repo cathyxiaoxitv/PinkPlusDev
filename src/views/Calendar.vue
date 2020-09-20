@@ -40,9 +40,11 @@
 
 
 import Vue from 'vue';
+import moment from "moment";
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
+import clone from "@/lib/clone";
 
 type HashTableValue = { title: string, item:RecordItem[]}
 type hashTable = { [key: string]: HashTableValue }
@@ -64,11 +66,13 @@ export default class Reports extends Vue {
     const {recordList} = this;
     const totalTable: hashTable = {};
     //声明这个hashTable的key是字符串，value是HashTableValue类型
-    for (let i = 0; i < recordList.length; i++) {
-      const date = recordList[i].createdAt!
+    const newList = clone(recordList).sort((a,b)=>moment(a.createdAt).valueOf()-moment(b.createdAt).valueOf())
+
+    for (let i = 0; i < newList.length; i++) {
+      const date = newList[i].createdAt!
       if(date.indexOf(this.month)> -1){
         totalTable[date] = totalTable[date] || {title: date, item: []}
-        totalTable[date].item.push(recordList[i])
+        totalTable[date].item.push(newList[i])
       }
     }
     return totalTable
