@@ -134,7 +134,7 @@ export default class Reports extends Vue {
   border-bottom: 1px solid lightgray;
 }
 .month-wrapper{
-  margin-top: 10px;
+  margin: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
