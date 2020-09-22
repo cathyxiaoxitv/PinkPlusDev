@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <a-month-picker placeholder="选择月份"
+  <div class="month-wrapper">
+    <a-month-picker
+        placeholder="选择月份"
                     @change="onChange"
                     :defaultValue="moment(getCurrentDate(),'YYYY-MM')"
     />
@@ -23,11 +24,17 @@ onChange(date:object,dateString:string){
     this.$emit('update:value',thisMonth)
     return new Date().toLocaleDateString();
   };
-
-
 }
 </script>
 
 <style lang="scss" scoped>
-
+.month-wrapper{
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .ant-calendar-picker,.ant-input{
+    width: 250px;
+  }
+}
 </style>

@@ -15,3 +15,8 @@ type RecordItem = {
   amount: number
   category: Tag
 }
+
+type ReportItem = {
+  text:string
+  value:string
+}

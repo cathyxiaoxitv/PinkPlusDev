@@ -1,7 +1,10 @@
 <template>
   <Layout>
-    <Tabs slot="header" class-prefix="interval" :data-source="array1" :value.sync="interval"/>
+    <Tabs slot="header"
+          :data-source="reportTypeList"
+          :value.sync="report.value" />
     <div slot="body">
+      <ChooseMonth/>
       <Chart :options="x"/>
     </div>
   </Layout>
@@ -14,15 +17,21 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 import Chart from '@/components/Chart.vue'
-
+import reportTypeList from '@/constants/reportTypeList';
+import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 
 @Component({
-  components: {Tabs,Chart}})
+  components: {ChooseMonth, Tabs,Chart}})
 
 export default class Reports extends Vue {
-
-  array1 = [{text: '月度报告', value: 'monthly'}, {text: '年度报告', value: 'yearly'}]
-  interval = 'monthly'
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+  reportTypeList = reportTypeList;
+  report: ReportItem = this.initReport();
+  initReport(): ReportItem {
+    return {text: '月度报告', value: 'month'}
+  }
   get x(){
     return{
       xAxis:{

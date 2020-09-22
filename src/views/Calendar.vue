@@ -4,7 +4,7 @@
       <p>明细</p>
     </div>
     <div slot="body">
-      <ChooseMonth class="month-wrapper"
+      <ChooseMonth
           @update:value = "month= $event"/>
       <div>
         <ol>
@@ -133,12 +133,7 @@ export default class Reports extends Vue {
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
 }
-.month-wrapper{
-  margin: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .title {
   @extend %item;
   min-height: 20px;
