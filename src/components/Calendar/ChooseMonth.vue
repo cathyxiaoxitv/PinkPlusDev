@@ -1,4 +1,4 @@
-<template>
+<template >
   <div class="month-wrapper">
     <a-month-picker
         placeholder="选择月份"
