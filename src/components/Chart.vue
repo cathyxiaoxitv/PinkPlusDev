@@ -17,7 +17,7 @@ mounted(){
   if(this.options === undefined){
     return console.error('options 为空')
   }
-  const chart = echarts.init(this.$refs.wrapper as HTMLDivElement)
+  const chart = echarts.init(this.$refs.wrapper as HTMLDivElement,'light')
   chart.setOption(this.options)
 }}
 </script>

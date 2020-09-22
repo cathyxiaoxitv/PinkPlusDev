@@ -29,12 +29,7 @@ import Icon from '@/components/Icon.vue';
 export default class Number extends Vue {
   @Prop() type!: string
   @Prop() value!: number
-
-
-  get recordTypeList() {
-    return this.$store.state.recordTypeList;
-  }
-
+  
   get commaAmount(){
     return this.value.toString().replace(/\D/g, "")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");

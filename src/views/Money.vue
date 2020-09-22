@@ -7,7 +7,6 @@
 
     <div slot="body" class="body">
       <div class="parts-wrapper">
-        {{record}}
         <DatePicker @update:value = "record.createdAt = $event"/>
         <Notes placeholder="在这里输入备注" :value.sync="record.notes"/>
         <Number
@@ -43,10 +42,6 @@ import DatePicker from '@/components/Money/DatePicker.vue';
 })
 
 export default class Money extends Vue {
-  get recordList() {
-    return this.$store.state.recordList;
-  }
-
   recordTypeList = recordTypeList;
   record: RecordItem = this.initRecord();
 
