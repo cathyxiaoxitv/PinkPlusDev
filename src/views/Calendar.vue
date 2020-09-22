@@ -1,9 +1,11 @@
 <template>
   <Layout>
     <div slot="header" class="mainTitle">
-      <ChooseMonth @update:value = "month= $event"/>
+      <p>明细</p>
     </div>
     <div slot="body">
+      <ChooseMonth class="month-wrapper"
+          @update:value = "month= $event"/>
       <div>
         <ol>
           <li v-for="(group,index) in result" :key="index">
@@ -132,11 +134,10 @@ export default class Reports extends Vue {
   border-bottom: 1px solid lightgray;
 }
 .month-wrapper{
-  line-height: 50px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
 }
 .title {
   @extend %item;
