@@ -59,7 +59,6 @@ export default class Reports extends Vue {
   beforeCreate() {
     this.$store.commit('fetchRecords')
   }
-
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
@@ -68,7 +67,7 @@ export default class Reports extends Vue {
     const {recordList} = this;
     const totalTable: hashTable = {};
     //声明这个hashTable的key是字符串，value是HashTableValue类型
-    const newList = clone(recordList).sort((a,b)=>moment(a.createdAt).valueOf()-moment(b.createdAt).valueOf())
+    const newList = clone(recordList).sort((a,b)=>moment(b.createdAt).valueOf()-moment(a.createdAt).valueOf())
 
     for (let i = 0; i < newList.length; i++) {
       const date = newList[i].createdAt!
@@ -77,6 +76,7 @@ export default class Reports extends Vue {
         totalTable[date].item.push(newList[i])
       }
     }
+    console.log(totalTable);
     return totalTable
   }
 
