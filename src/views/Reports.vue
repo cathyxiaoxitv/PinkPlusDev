@@ -26,7 +26,6 @@ import recordTypeList from "@/constants/recordTypeList";
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 import SimpleTab from "@/components/Reports/SimpleTab.vue";
 import clone from "@/lib/clone";
-import moment from "moment";
 import _ from 'lodash'
 
 
@@ -69,7 +68,7 @@ export default class Reports extends Vue {
         thisMonthList.push(clonedList[i])
       }
     }
-
+    console.log(thisMonthList);
     const map = new Map()
     for (let i = 0; i < thisMonthList.length; i++) {
       const category: string = thisMonthList[i].category.name;
@@ -82,18 +81,20 @@ export default class Reports extends Vue {
         map.set(category, value);
       }
     }
+    console.log([...map]);
     return [...map];
   }
 
   get x() {
+    console.log('options are read');
     const tags = this.categoryList.map(item => item[0])
+    console.log(tags);
     const chartData = this.categoryList.reduce((result, item) => {
           result.push({'name': item[0] as string, 'value': item[1] as number})
           return result;
         },
         [] as CategoryArray[])
-
-
+    console.log(chartData);
     return {
       color: ['rgb(254,67,101)', 'rgb(252,157,154)', 'rgb(249,205,173)', 'rgb(200,200,169)', 'rgb(131,175,155)'],
       tooltip: {
