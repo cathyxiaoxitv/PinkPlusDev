@@ -32,6 +32,7 @@ nav {
   font-size: 12px;
   justify-content: space-between;
   > .item{
+    color: lighten($color-highlight,10%);
     padding: 8px 0;
     width: 33.33333%;
     display: flex;

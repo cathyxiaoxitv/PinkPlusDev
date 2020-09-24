@@ -10,8 +10,6 @@
       <SimpleTab
           :data-source="recordTypeList"
           :value.sync="record.type"/>
-      {{this.expense}}
-      {{this.income}}
       <ul class="upper-wrapper">
         <li :class="{red:this.expense>0}" @click="record.type ='-'">-{{this.expense|addComma}}</li>
         <li :class="{green:this.income>0}" @click="record.type ='+'">+{{this.income|addComma}}</li>

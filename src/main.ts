@@ -8,7 +8,7 @@ import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 
 import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.less';
 import moment from 'moment';
 import 'moment/locale/zh-cn'
 moment.locale('zh-cn');

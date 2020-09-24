@@ -41,6 +41,8 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "html-webpack-plugin": "^4.4.1",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.1",
     "lint-staged": "^9.5.0",
     "sass": "^1.26.10",
     "sass-loader": "^8.0.0",

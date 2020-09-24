@@ -3,7 +3,6 @@
 
     <p slot="title">分类</p>
     <div class="scrollArea">
-
       <ul slot="content" class="tagList">
         <li v-for="(tag,index) in filteredList" :key="index"
         >
@@ -14,7 +13,12 @@
             {{ tag.name }}
           </div>
         </li>
+        <li class="icon-wrapper">
+          <router-link class="test" to="/reports">遍历</router-link>
+        </li>
+
       </ul>
+
     </div>
   </div>
 </template>
@@ -125,6 +129,8 @@ p {
     }
   }
 }
-
+.test{
+  border: 1px solid red;
+}
 
 </style>
