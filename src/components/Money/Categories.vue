@@ -91,7 +91,7 @@ p {
         justify-content: center;
 
         &.selected {
-          box-shadow: 0 0 2px lightgray;
+          box-shadow: 2px 2px 2px lightgray;
           background: #FEF0EB;
 
           svg {

@@ -48,8 +48,12 @@ export default class SimpleTab extends Vue {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  :hover{
+    cursor: pointer;
+  }
 
   > li {
+
     width: 125px;
     padding: 3px 35px;
     font-weight: bold;

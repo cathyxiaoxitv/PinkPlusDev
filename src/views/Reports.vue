@@ -10,10 +10,10 @@
       <SimpleTab
           :data-source="recordTypeList"
           :value.sync="record.type"/>
-      <div class="upper-wrapper">
-        <span :class="{red:this.expense>0}">-{{this.expense|addComma}}</span>
-        <span :class="{green:this.expense>0}">+{{this.income|addComma}}</span>
-      </div>
+      <ul class="upper-wrapper">
+        <li :class="{red:this.expense>0}" @click="record.type ='-'">-{{this.expense|addComma}}</li>
+        <li :class="{green:this.income>0}" @click="record.type ='+'">+{{this.income|addComma}}</li>
+      </ul>
       <div class="down-wrapper">
         <span :class="{green:this.income>this.expense,red:this.expense>this.income}">共计: {{this.income-this.expense|addComma}}</span >
       </div>
@@ -178,14 +178,18 @@ export default class Reports extends Vue {
   border-bottom: 1px solid lightgray;
 }
 %amount{
+  height: 50px;
   display: block;
   text-align: center;
+  line-height: 50px;
   width: 120px;
   font-weight: bold;
   border: 1px solid lightgray;
-  border-radius: 3px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px lightgray;
   margin: 5px;
   color: lightgray;
+
   &.red{
     color: red;
   }
@@ -247,8 +251,13 @@ export default class Reports extends Vue {
 .upper-wrapper{
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  :hover{
+    cursor: pointer;
+  }
 
-  span{
+  li{
    @extend %amount;
   }
 }
