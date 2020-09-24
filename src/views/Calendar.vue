@@ -123,6 +123,7 @@ export default class Reports extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import "~@/assets/style/helper.scss";
 .mainTitle{
   font-weight: bold;
   font-size: larger;
@@ -139,9 +140,9 @@ export default class Reports extends Vue {
   min-height: 20px;
   background: #F4F5F6;
   .amount{
-    color: red;
+    color: $color-minus;
     &.positive{
-      color:green
+      color:$color-plus
     }
   }
 

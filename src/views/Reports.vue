@@ -194,6 +194,7 @@ comment() {
 </script>
 
 <style scoped lang="scss">
+@import "~@/assets/style/helper.scss";
 %item {
   padding: 0 10px;
   display: flex;
@@ -214,10 +215,10 @@ comment() {
   color: lightgray;
 
   &.red{
-    color: red;
+    color: $color-minus;
   }
   &.green{
-    color: green;
+    color: $color-plus;
   }
 }
 .title {

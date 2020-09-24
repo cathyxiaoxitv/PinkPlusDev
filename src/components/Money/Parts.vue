@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .wrapper{
   margin: 5px 0;
   //border: 1px solid red;
