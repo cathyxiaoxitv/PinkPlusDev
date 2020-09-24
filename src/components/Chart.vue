@@ -24,7 +24,6 @@ mounted(){
   @Watch('options')
   onOptionsChange(newValue:EChartOption){
     this.chart!.setOption(newValue)
-
   }
 }
 </script>

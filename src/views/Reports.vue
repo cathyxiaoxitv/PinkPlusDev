@@ -9,7 +9,10 @@
       <SimpleTab
           :data-source="recordTypeList"
           :value.sync="record.type"/>
-      <Chart class="chart" :options="x"/>
+      <span>总支出{{this.expense}}</span><span>总收入{{this.income}}</span>
+      <div>收支{{this.income-this.expense}}</div >
+      <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
+      <div v-else class="notification">暂无数据</div>
     </div>
   </Layout>
 </template>
@@ -38,6 +41,8 @@ type CategoryArray = { name: string, value: number }
 })
 export default class Reports extends Vue {
   month = ''
+  expense = 0
+  income = 0
   recordTypeList = recordTypeList;
   reportTypeList = reportTypeList;
   record: RecordItem = this.initRecord();
@@ -61,14 +66,30 @@ export default class Reports extends Vue {
 
   get categoryList() {
     let clonedList = clone(this.recordList).map(r => _.pick(r, ['createdAt', 'amount', 'category', 'type']));
-    let thisMonthList = []
+
+  const totalMap = new Map()
+    for(let i = 0;i<clonedList.length;i++){
+      const type:string = clonedList[i].type;
+      const value:number = clonedList[i].amount
+      if(totalMap.has(type)){
+        const prevValue = totalMap.get(type)
+        const currentValue = prevValue + value;
+        totalMap.set(type,currentValue)
+      }else{
+        totalMap.set(type,value);
+      }
+    }
+    this.income = totalMap.get('+')
+    this.expense = totalMap.get('-')
+    // this.expense = [...map].map(item=>item[1]).reduce((total,item)=>total+item,0)
+        let thisMonthList = []
     for (let i = 0; i < clonedList.length; i++) {
-      if (clonedList[i].createdAt!.indexOf(this.month) > -1 &&
-          clonedList[i].category.type === this.record.type) {
+      if (clonedList[i].createdAt!.indexOf(this.month) > -1
+          && clonedList[i].category.type === this.record.type)
+      {
         thisMonthList.push(clonedList[i])
       }
     }
-    console.log(thisMonthList);
     const map = new Map()
     for (let i = 0; i < thisMonthList.length; i++) {
       const category: string = thisMonthList[i].category.name;
@@ -81,20 +102,18 @@ export default class Reports extends Vue {
         map.set(category, value);
       }
     }
-    console.log([...map]);
+
+
     return [...map];
   }
 
-  get x() {
-    console.log('options are read');
+  get chartOptions() {
     const tags = this.categoryList.map(item => item[0])
-    console.log(tags);
     const chartData = this.categoryList.reduce((result, item) => {
           result.push({'name': item[0] as string, 'value': item[1] as number})
           return result;
         },
         [] as CategoryArray[])
-    console.log(chartData);
     return {
       color: ['rgb(254,67,101)', 'rgb(252,157,154)', 'rgb(249,205,173)', 'rgb(200,200,169)', 'rgb(131,175,155)'],
       tooltip: {
@@ -103,7 +122,9 @@ export default class Reports extends Vue {
       },
       legend: {
         orient: 'vertical',
-        left: 'left',
+        left: 10,
+        top:10,
+
         data: tags
       },
       series: [
@@ -187,6 +208,13 @@ export default class Reports extends Vue {
 
 }
 
-.chart {
+.notification {
+  font-weight: bold;
+  color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
 }
 </style>
