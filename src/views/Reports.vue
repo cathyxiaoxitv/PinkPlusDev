@@ -6,11 +6,13 @@
 
     <div slot="body">
       <ChooseMonth @update:value="month= $event"/>
+      <div class="upper-wrapper">
+        <span>总支出{{this.expense|addComma}}</span><span>总收入{{this.income|addComma}}</span>
+      </div>
+      <div class="down-wrapper">收支{{this.income-this.expense}}</div >
       <SimpleTab
           :data-source="recordTypeList"
           :value.sync="record.type"/>
-      <span>总支出{{this.expense}}</span><span>总收入{{this.income}}</span>
-      <div>收支{{this.income-this.expense}}</div >
       <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
       <div v-else class="notification">暂无数据</div>
     </div>
@@ -37,7 +39,12 @@ type hashTable = { [key: string]: HashTableValue }
 type CategoryArray = { name: string, value: number }
 
 @Component({
-  components: {ChooseMonth, Tabs, Chart, SimpleTab}
+  components: {ChooseMonth, Tabs, Chart, SimpleTab},
+  filters:{
+    addComma(amount:number){
+      return amount.toLocaleString()
+    }
+  }
 })
 export default class Reports extends Vue {
   month = ''
@@ -208,6 +215,17 @@ export default class Reports extends Vue {
 
 }
 
+.upper-wrapper{
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  span{
+    font-weight: bold;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin: 5px;
+  }
+}
 .notification {
   font-weight: bold;
   color: lightgray;
