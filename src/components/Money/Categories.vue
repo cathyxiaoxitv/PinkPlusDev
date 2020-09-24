@@ -82,16 +82,16 @@ p {
       .icon-wrapper {
         border: 1px solid lightgray;
         margin-bottom: 10px;
-        border-radius: 5px;
+        border-radius: 10px;
         width: 80%;
-        height: 80px;
+        height: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
         &.selected {
-          box-shadow: 2px 2px 2px lightgray;
+          box-shadow: 1px 2px 2px lightgray;
           background: #FEF0EB;
 
           svg {
@@ -100,9 +100,9 @@ p {
         }
       }
       svg {
-        margin: 8px;
-        height: 40px;
-        width: 40px;
+        margin-top: 2px;
+        height: 50px;
+        width: 50px;
       }
 
       @keyframes shake {

@@ -10,12 +10,16 @@
       <SimpleTab
           :data-source="recordTypeList"
           :value.sync="record.type"/>
+      {{this.expense}}
+      {{this.income}}
       <ul class="upper-wrapper">
         <li :class="{red:this.expense>0}" @click="record.type ='-'">-{{this.expense|addComma}}</li>
         <li :class="{green:this.income>0}" @click="record.type ='+'">+{{this.income|addComma}}</li>
       </ul>
       <div class="down-wrapper">
-        <span :class="{green:this.income>this.expense,red:this.expense>this.income}">共计: {{this.income-this.expense|addComma}}</span >
+        <span
+            @click="comment"
+            :class="{green:this.income>this.expense,red:this.expense>this.income}">共计: {{this.income-this.expense|addComma}}</span >
       </div>
       <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
       <div v-else class="notification">暂无数据</div>
@@ -81,11 +85,17 @@ export default class Reports extends Vue {
       totalMap.set(type, value);
     }
   }
-     console.log(totalMap);
-     this.income = totalMap.get('+')
-  this.expense = totalMap.get('-')
-
-  return this.expense & this.income
+     if(totalMap.get('+')){
+       this.income = totalMap.get('+')
+     }else{
+       this.income = 0
+     }
+     if(totalMap.get('-')){
+       this.expense = totalMap.get('-')
+     }else{
+       this.expense = 0
+     }
+     return this.expense & this.income
 }
   beforeCreate() {
     this.$store.commit('fetchRecords')
@@ -102,6 +112,21 @@ export default class Reports extends Vue {
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
+comment() {
+  if (this.income - this.expense > 0) {
+    this.$success({
+      centered:true,
+      title: '攒钱高手',
+      content: '这个月会发财哦👏'
+    })
+  } else if ((this.income) && (this.income - this.expense <= 0)) {
+    this.$success({
+      centered:true,
+      title: '入不敷出',
+      content: '注意收支平衡哦！'
+    })
+  }
+}
 
   get categoryList() {
     let thisMonthList = []
@@ -186,7 +211,7 @@ export default class Reports extends Vue {
   font-weight: bold;
   border: 1px solid lightgray;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px lightgray;
+  box-shadow: 1px 2px 2px lightgray;
   margin: 5px;
   color: lightgray;
 
