@@ -6,13 +6,17 @@
 
     <div slot="body">
       <ChooseMonth @update:value="month= $event"/>
-      <div class="upper-wrapper">
-        <span>总支出{{this.expense|addComma}}</span><span>总收入{{this.income|addComma}}</span>
-      </div>
-      <div class="down-wrapper">收支{{this.income-this.expense}}</div >
+
       <SimpleTab
           :data-source="recordTypeList"
           :value.sync="record.type"/>
+      <div class="upper-wrapper">
+        <span class="red">-{{this.expense|addComma}}</span>
+        <span class="green">{{this.income|addComma}}</span>
+      </div>
+      <div class="down-wrapper">
+        <span :class="{red:this.income-this.expense<=0}">共计: {{this.income-this.expense|addComma}}</span >
+      </div>
       <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
       <div v-else class="notification">暂无数据</div>
     </div>
@@ -163,7 +167,15 @@ export default class Reports extends Vue {
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
 }
-
+%amount{
+  display: block;
+  text-align: center;
+  width: 120px;
+  font-weight: bold;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  margin: 5px;
+}
 .title {
   @extend %item;
   min-height: 20px;
@@ -216,15 +228,30 @@ export default class Reports extends Vue {
 }
 
 .upper-wrapper{
-  border: 1px solid red;
   display: flex;
   justify-content: center;
   span{
-    font-weight: bold;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    margin: 5px;
+   @extend %amount;
+    &.red{
+     color: red;
+    }
+    &.green{
+      color: green;
+    }
   }
+}
+.down-wrapper{
+  span {
+    @extend %amount;
+    color: green;
+    &.red{
+      color: red;
+    }
+  }
+  display: flex;
+  justify-content: center;
+
+
 }
 .notification {
   font-weight: bold;

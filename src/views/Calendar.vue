@@ -165,9 +165,6 @@ export default class Reports extends Vue {
       width: 35px;
       height:35px;
     }
-    .tag{
-      font-weight: bold;
-    }
     .notes{
       margin: 0 5px;
       color: gray;
