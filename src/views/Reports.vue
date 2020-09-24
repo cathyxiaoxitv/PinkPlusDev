@@ -11,11 +11,11 @@
           :data-source="recordTypeList"
           :value.sync="record.type"/>
       <div class="upper-wrapper">
-        <span class="red">-{{this.expense|addComma}}</span>
-        <span class="green">{{this.income|addComma}}</span>
+        <span :class="{red:this.expense>0}">-{{this.expense|addComma}}</span>
+        <span :class="{green:this.expense>0}">+{{this.income|addComma}}</span>
       </div>
       <div class="down-wrapper">
-        <span :class="{red:this.income-this.expense<=0}">共计: {{this.income-this.expense|addComma}}</span >
+        <span :class="{green:this.income>this.expense,red:this.expense>this.income}">共计: {{this.income-this.expense|addComma}}</span >
       </div>
       <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
       <div v-else class="notification">暂无数据</div>
@@ -27,7 +27,7 @@
 
 
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 import Chart from '@/components/Chart.vue'
 import reportTypeList from '@/constants/reportTypeList';
@@ -46,6 +46,7 @@ type CategoryArray = { name: string, value: number }
   components: {ChooseMonth, Tabs, Chart, SimpleTab},
   filters:{
     addComma(amount:number){
+      if(!amount){return}
       return amount.toLocaleString()
     }
   }
@@ -58,7 +59,34 @@ export default class Reports extends Vue {
   reportTypeList = reportTypeList;
   record: RecordItem = this.initRecord();
   report: ReportItem = this.initReport();
+   clonedList = clone(this.recordList).map(r => _.pick(r, ['createdAt', 'amount', 'category', 'type']));
+   @Watch('month')
+  updateBalance() {
+     let thisMonthList = []
+     for (let i = 0; i < this.clonedList.length; i++) {
+       if (this.clonedList[i].createdAt!.indexOf(this.month) > -1)
+       {
+         thisMonthList.push(this.clonedList[i])
+       }
+     }
+  const totalMap = new Map()
+  for (let i = 0; i < thisMonthList.length; i++) {
+    const type: string = thisMonthList[i].type;
+    const value: number = thisMonthList[i].amount
+    if (totalMap.has(type)) {
+      const prevValue = totalMap.get(type)
+      const currentValue = prevValue + value;
+      totalMap.set(type, currentValue)
+    } else {
+      totalMap.set(type, value);
+    }
+  }
+     console.log(totalMap);
+     this.income = totalMap.get('+')
+  this.expense = totalMap.get('-')
 
+  return this.expense & this.income
+}
   beforeCreate() {
     this.$store.commit('fetchRecords')
   }
@@ -76,31 +104,15 @@ export default class Reports extends Vue {
   }
 
   get categoryList() {
-    let clonedList = clone(this.recordList).map(r => _.pick(r, ['createdAt', 'amount', 'category', 'type']));
-
-  const totalMap = new Map()
-    for(let i = 0;i<clonedList.length;i++){
-      const type:string = clonedList[i].type;
-      const value:number = clonedList[i].amount
-      if(totalMap.has(type)){
-        const prevValue = totalMap.get(type)
-        const currentValue = prevValue + value;
-        totalMap.set(type,currentValue)
-      }else{
-        totalMap.set(type,value);
-      }
-    }
-    this.income = totalMap.get('+')
-    this.expense = totalMap.get('-')
-    // this.expense = [...map].map(item=>item[1]).reduce((total,item)=>total+item,0)
-        let thisMonthList = []
-    for (let i = 0; i < clonedList.length; i++) {
-      if (clonedList[i].createdAt!.indexOf(this.month) > -1
-          && clonedList[i].category.type === this.record.type)
+    let thisMonthList = []
+    for (let i = 0; i < this.clonedList.length; i++) {
+      if (this.clonedList[i].createdAt!.indexOf(this.month) > -1
+          && this.clonedList[i].category.type === this.record.type)
       {
-        thisMonthList.push(clonedList[i])
+        thisMonthList.push(this.clonedList[i])
       }
     }
+
     const map = new Map()
     for (let i = 0; i < thisMonthList.length; i++) {
       const category: string = thisMonthList[i].category.name;
@@ -113,8 +125,6 @@ export default class Reports extends Vue {
         map.set(category, value);
       }
     }
-
-
     return [...map];
   }
 
@@ -175,6 +185,13 @@ export default class Reports extends Vue {
   border: 1px solid lightgray;
   border-radius: 3px;
   margin: 5px;
+  color: lightgray;
+  &.red{
+    color: red;
+  }
+  &.green{
+    color: green;
+  }
 }
 .title {
   @extend %item;
@@ -230,23 +247,14 @@ export default class Reports extends Vue {
 .upper-wrapper{
   display: flex;
   justify-content: center;
+
   span{
    @extend %amount;
-    &.red{
-     color: red;
-    }
-    &.green{
-      color: green;
-    }
   }
 }
 .down-wrapper{
   span {
     @extend %amount;
-    color: green;
-    &.red{
-      color: red;
-    }
   }
   display: flex;
   justify-content: center;
