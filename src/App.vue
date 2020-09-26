@@ -4,23 +4,24 @@
   </div>
 </template>
 
-<script>
-window.onload = () => {
-  document.addEventListener('touchstart', (event) => {
+<script lang="ts">
+window.onload = function () {
+  document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
       event.preventDefault();
     }
+  }, {
+    passive: false  // 关闭被动监听
   });
-
   let lastTouchEnd = 0;
-  document.addEventListener('touchend', (event) => {
-    const now = (new Date()).getTime();
+  document.addEventListener('touchend', function (event) {
+    let now = (new Date()).getTime();
     if (now - lastTouchEnd <= 300) {
       event.preventDefault();
     }
     lastTouchEnd = now;
   }, false);
-}
+};
 </script>
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
