@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <p slot="title">分类</p>
     <div class="scrollArea">
       <ul slot="content" class="tagList">
@@ -38,7 +37,7 @@ export default class Categories extends Vue {
 //better 重复
 created(){
     this.$store.commit('fetchTags')
-    this.$store.commit('setDefault')
+    this.$store.commit('createTag')
 }
   get filteredList() {
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)

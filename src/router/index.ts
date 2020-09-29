@@ -5,6 +5,7 @@ import Reports from '@/views/Reports.vue';
 import NotFound from '@/views/NotFound.vue';
 import Calendar from '@/views/Calendar.vue';
 import Edit from "@/components/Money/Edit.vue";
+import Add from "@/components/Money/Add.vue";
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,9 @@ Vue.use(VueRouter)
     {
       path:'/money/edit',
       component:Edit,
+    },
+    {path:'/money/edit/add',
+      component:Add,
     },
     {
       path:'/money',

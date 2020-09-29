@@ -18,7 +18,7 @@
             </h3>
             <ol>
               <li v-for="item in group.item" :key="item.id"
-                  class="record"
+                  class="detail"
                   @click="editRecord"
               >
                 <div class="icon-wrapper">
@@ -147,7 +147,7 @@ export default class Reports extends Vue {
   }
 
 }
-.record{
+.detail{
   @extend %item;
   min-height: 45px;
   align-items: center;

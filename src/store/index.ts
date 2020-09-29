@@ -16,7 +16,9 @@ const store = new Vuex.Store({
     } as RootState,
     mutations: {
         setDefault(){
-            window.localStorage.setItem('tagList',JSON.stringify(defaultTagList))
+            for(let i = 0;i<defaultTagList.length;i++){
+                store.commit('createTag',defaultTagList[i])
+            }
         },
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];

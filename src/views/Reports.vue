@@ -236,7 +236,7 @@ comment() {
 
 }
 
-.record {
+.detail {
   @extend %item;
   min-height: 30px;
   align-items: center;
