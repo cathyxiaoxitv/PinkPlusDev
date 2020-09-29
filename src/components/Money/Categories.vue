@@ -36,7 +36,10 @@ export default class Categories extends Vue {
   @Prop() type!: string
 
 //better 重复
-
+created(){
+    this.$store.commit('fetchTags')
+    this.$store.commit('setDefault')
+}
   get filteredList() {
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)
   }
