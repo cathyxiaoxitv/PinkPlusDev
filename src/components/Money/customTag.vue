@@ -1,44 +1,47 @@
 <template>
-  <Layout>
-    <div class="mainTitle" slot="header">制作新科目</div>
-    <div slot="body">
-      <Parts>
-        <p slot="title">名字</p>
-        <label slot="content">
-          <a-input type="text" placeholder="请输入项目名"/>
-        </label>
-      </Parts>
-      <custom-tag selected-tag="note"/>
+  <div>
+    <p slot="title">分类</p>
+    <div class="scrollArea">
+      <ul slot="content" class="tagList">
+        <li v-for="tag in customTagList" :key="tag.name">
+          <div class="icon-wrapper"
+               :class="{selected:tag.name === selectedTag.name } "
+               @click="select(tag)">
+            <Icon :name="tag.name"></Icon>
+          </div>
+        </li>
+      </ul>
+
     </div>
-  </Layout>
+  </div>
 </template>
 
 <script lang="ts">
+
+
+import {Component, Prop} from 'vue-property-decorator';
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
-import Parts from "@/components/Money/Parts.vue";
-import Categories from "@/components/Money/Categories.vue";
+import Parts from '@/components/Money/Parts.vue';
+import Icon from '@/components/Icon.vue';
 import customTagList from "@/constants/customTagList";
-import Icon from "@/components/Icon.vue";
-import CustomTag from "@/components/Money/customTag.vue";
-@Component({
-  components: {CustomTag, Icon, Parts,Categories}
-})
-export default class Add extends Vue {
+
+@Component({components: {Icon, Parts}})
+export default class customTag extends Vue {
+  @Prop() selectedTag!:Tag
+
 customTagList = customTagList
-}
+//better 重复
+
+
+};
 </script>
 
 <style lang="scss" scoped>
-.mainTitle{
+@import "~@/assets/style/helper.scss";
+
+p {
+  padding: 10px 20px;
   font-weight: bold;
-  font-size: larger;
-}
-.icon-area{
-  p {
-    padding: 10px 20px;
-    font-weight: bold;
-  }
 }
 
 .scrollArea {
@@ -80,8 +83,8 @@ customTagList = customTagList
       }
       svg {
         margin-top: 2px;
-        height: 50px;
-        width: 50px;
+        height: 20px;
+        width: 20px;
       }
 
       @keyframes shake {
@@ -104,5 +107,6 @@ customTagList = customTagList
     }
   }
 }
+
 
 </style>

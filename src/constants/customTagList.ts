@@ -9,6 +9,9 @@ const customTagList = [
     {name: 'cup'},
     {name: 'clock'},
     {name: 'camera'},
-    {name: 'banknote'}
+    {name: 'banknote'},
+    {name:'phone'},
+    {name:'credit'},
+    {name:'deposit'}
 ]
 export default customTagList;

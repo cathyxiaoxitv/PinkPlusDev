@@ -15,11 +15,6 @@ const store = new Vuex.Store({
         createTagError: null,
     } as RootState,
     mutations: {
-        setDefault(){
-            for(let i = 0;i<defaultTagList.length;i++){
-                store.commit('createTag',defaultTagList[i])
-            }
-        },
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
         },
@@ -37,14 +32,19 @@ const store = new Vuex.Store({
                 store.commit('setDefault')
             }
         },
-        createTag(state, newTag:Tag) {
+        setDefault(){
+            for(let i = 0;i<defaultTagList.length;i++){
+                store.commit('createTag',defaultTagList[i])
+            }
+        },
+        createTag(state, tag:Tag) {
             const names = state.tagList.map(tag => tag.name);
-            if (names.indexOf(newTag.name) >= 0) {
+            if (names.indexOf(tag.name) >= 0) {
                 state.createTagError = new Error('tag name duplicated')
                 return;
             }
             const id = createId().toString();
-            state.tagList.push({id, name: newTag.name,type:newTag.type})
+            state.tagList.push({id, name: tag.name,type:tag.type})
             store.commit('saveTags')
         },
         saveTags(state){
