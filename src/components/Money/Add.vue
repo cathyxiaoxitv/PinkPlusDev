@@ -8,7 +8,7 @@
           <a-input type="text" placeholder="请输入项目名"/>
         </label>
       </Parts>
-      <custom-tag selected-tag="note"/>
+      <custom-tag :selectedTag.sync="newTag"/>
     </div>
   </Layout>
 </template>
@@ -26,6 +26,7 @@ import CustomTag from "@/components/Money/customTag.vue";
 })
 export default class Add extends Vue {
 customTagList = customTagList
+  newTag = {name:'note'}
 }
 </script>
 

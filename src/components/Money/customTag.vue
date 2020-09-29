@@ -27,11 +27,13 @@ import customTagList from "@/constants/customTagList";
 
 @Component({components: {Icon, Parts}})
 export default class customTag extends Vue {
-  @Prop() selectedTag!:Tag
+  @Prop() selectedTag!:customTag
 
 customTagList = customTagList
-//better 重复
 
+  select(tag:customTag){
+    this.$emit('update:selectedTag',tag)
+  }
 
 };
 </script>

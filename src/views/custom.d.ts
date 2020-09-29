@@ -1,5 +1,8 @@
+import customTag from "@/components/Money/customTag.vue";
+
 type RootState = {
-  tagList: Tag[]
+  tagList: Tag[],
+  customTagList:customTag[],
   recordList:RecordItem[]
   createTagError:Error|null
 }
@@ -8,6 +11,11 @@ type Tag = {
   id:string,
   name: string,
   type:string
+}
+
+type customTag={
+  id:string,
+  name:string
 }
 
 type RecordItem = {
