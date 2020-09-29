@@ -6,11 +6,17 @@
   />
 
   <div slot="body">
-    {{type}}
     <ol>
-      <li v-for="tag in filteredList">
-        <Icon :name="tag.name"></Icon>
-        {{ tag.name }}
+      <li v-for="tag in filteredList"
+      class="record" >
+        <div class="icon-wrapper">
+        <Icon :name="tag.name" class="icon"></Icon>
+        <span class="tag">{{ tag.name }}</span>
+      </div>
+        <div  @click="deleteTag(tag)">
+        <Icon name="delete"
+        ></Icon>
+        </div>
       </li>
     </ol>
   </div>
@@ -30,17 +36,50 @@ import recordTypeList from '@/constants/recordTypeList';
 export default class Edit extends Vue  {
   type = '-'
   recordTypeList = recordTypeList;
-  // record: RecordItem = this.initRecord();
-  //
-  // initRecord(): RecordItem {
-  //   return {category: {name: '饮食费', type: '-'}, notes: '', type: '-', amount: 0, createdAt: ''};
-  // }
+
   get filteredList() {
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)
+  }
+  deleteTag(tag:Tag){
+    console.log(tag.name);
+    this.$store.commit('deleteTag',tag.name)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+%item{
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+}
+.record {
+  @extend %item;
+  min-height: 45px;
+  align-items: center;
+}
+.icon-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  .icon{
+    padding: 5px;
+    margin-right:5px;
+    width: 35px;
+    height:35px;
+  }
+  .notes{
+    margin: 0 5px;
+    color: gray;
+    font-size: x-small;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.delete{
+  width: 20px;
+  height: 20px;
+  border: 1px solid red;
+}
 </style>

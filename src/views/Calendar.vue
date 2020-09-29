@@ -149,7 +149,7 @@ export default class Reports extends Vue {
 }
 .record{
   @extend %item;
-  min-height: 30px;
+  min-height: 45px;
   align-items: center;
 
   .money-wrapper{

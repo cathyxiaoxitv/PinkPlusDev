@@ -118,7 +118,7 @@ comment() {
       content: '这个月会发财哦👏'
     })
   } else if ((this.income) && (this.income - this.expense <= 0)) {
-    this.$success({
+    this.$warning({
       centered:true,
       title: '入不敷出',
       content: '注意收支平衡哦！'

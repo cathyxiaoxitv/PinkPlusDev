@@ -1,6 +1,7 @@
 type RootState = {
   tagList: Tag[]
   recordList:RecordItem[]
+  createTagError:Error|null
 }
 
 type Tag = {
