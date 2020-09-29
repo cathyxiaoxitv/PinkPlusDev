@@ -4,8 +4,7 @@
     <p slot="title">分类</p>
     <div class="scrollArea">
       <ul slot="content" class="tagList">
-        <li v-for="(tag,index) in filteredList" :key="index"
-        >
+        <li v-for="(tag,index) in filteredList" :key="index">
           <div class="icon-wrapper"
                :class="{selected:tag.name === selectedTag.name } "
                @click="select(tag)">
@@ -13,8 +12,8 @@
             {{ tag.name }}
           </div>
         </li>
-        <li class="icon-wrapper">
-          <router-link class="test" to="/reports">遍历</router-link>
+        <li>
+          <div class="icon-wrapper" @click="edit"> 编辑 ></div>
         </li>
 
       </ul>
@@ -52,6 +51,9 @@ export default class Categories extends Vue {
   }
   select(tag:Tag){
     this.$emit('update:selectedTag',tag)
+  }
+  edit(){
+    this.$router.replace('/money/edit')
   }
 
 
@@ -129,8 +131,6 @@ p {
     }
   }
 }
-.test{
-  border: 1px solid red;
-}
+
 
 </style>
