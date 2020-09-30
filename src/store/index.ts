@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createId from "@/lib/createId";
-import defaultTagList from "@/constants/defaultTagList";
+import  defaultTagList from "@/constants/defaultTagList";
 import {RecordItem, RootState, Tag} from '@/views/custom';
 
 Vue.use(Vuex);

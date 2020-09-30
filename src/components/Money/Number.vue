@@ -1,6 +1,6 @@
 <template>
   <Parts>
-    <p slot="title" v-if="type === '-'">支出</p>
+    <p slot="title" v-if="type === '支出'">支出</p>
     <p slot="title" v-else>收入</p>
     <label slot="content">
       <a-input type="text"

@@ -38,7 +38,7 @@ import recordTypeList from '@/constants/recordTypeList';
   components: {Tabs}
 })
 export default class Edit extends Vue {
-  type = '-'
+  type = '支出'
   recordTypeList = recordTypeList;
 
   get filteredList() {

@@ -13,7 +13,7 @@
               <span>{{group.title}}</span>
               <span
                   class="amount"
-                  :class="{positive:showTotal(group).substring(0,1)==='+'}"
+                  :class="{positive:showTotal(group).substring(0,1)==='收入'}"
               >{{ showTotal(group)}}</span>
             </h3>
             <ol>
@@ -85,7 +85,7 @@ export default class Reports extends Vue {
     let total = 0
     let item:RecordItem
     for(item of group.item){
-      if(item.type ==='-') {
+      if(item.type ==='支出') {
         total -= item.amount
       }
       else{
@@ -93,9 +93,9 @@ export default class Reports extends Vue {
       }
     }
     if(total>0){
-      return '+'+this.addComma(total)
+      return '收入'+this.addComma(total)
     }else if(total<0){
-      return '-'+this.addComma(total)
+      return '支出'+this.addComma(total)
     }else{
       return '0'
     }
@@ -111,10 +111,10 @@ export default class Reports extends Vue {
   }
   showAmount(item:RecordItem){
     let commaAmount = this.addComma(item.amount)
-    if(item.type === '+'){
-      return '+'+commaAmount
+    if(item.type === '收入'){
+      return '收入'+commaAmount
     }else{
-      return '-'+commaAmount
+      return '支出'+commaAmount
     }
   }
   editRecord(){

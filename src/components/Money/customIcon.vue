@@ -16,8 +16,6 @@
 </template>
 
 <script lang="ts">
-
-
 import {Component, Prop} from 'vue-property-decorator';
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';

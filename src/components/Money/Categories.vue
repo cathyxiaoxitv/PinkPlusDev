@@ -45,9 +45,9 @@ created(){
   @Watch('type')
   updateCategory() {
     if (this.type === "+") {
-      this.select({name:'工资',type:'+'})
+      this.select({name:'工资',type:'收入'})
     } else{
-      this.select({name:'饮食费',type:'-'})
+      this.select({name:'饮食费',type:'支出'})
     }
   }
   select(tag:Tag){
