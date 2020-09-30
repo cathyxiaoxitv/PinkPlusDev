@@ -6,10 +6,11 @@
         <p slot="title">名字</p>
         <label slot="content">
           <a-input type="text" placeholder="请输入项目名"
+                   @input="onValueChanged"
           />
         </label>
       </Parts>
-      <custom-icon/>
+      <custom-icon :selected-tag.sync="newTag.svg"/>
 
       <div class="-button-wrapper">
         <a-button @click="save">确定</a-button>
@@ -32,10 +33,17 @@ import {Tag} from "@/views/custom";
 })
 export default class Add extends Vue {
   customTagList = customTagList
-  newTag:Tag
+  newTag:Tag = {name:'',svg:'note',type:''}
+  created(){
+    this.newTag.type = this.$route.params.type;
+  }
 save(){
     this.$store.commit('createTag',this.newTag)
 }
+  onValueChanged(event:InputEvent){
+    const input = (event.currentTarget as HTMLInputElement)
+    this.newTag.name = input.value;
+  }
 }
 </script>
 

@@ -7,7 +7,7 @@
           <div class="icon-wrapper"
                :class="{selected:tag.name === selectedTag.name } "
                @click="select(tag)">
-              <Icon :name="tag.name"></Icon>
+              <Icon :name="tag.svg"></Icon>
             {{ tag.name }}
           </div>
         </li>

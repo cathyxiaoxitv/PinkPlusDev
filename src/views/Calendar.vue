@@ -22,7 +22,7 @@
                   @click="editRecord"
               >
                 <div class="icon-wrapper">
-                  <Icon :name="item.category.name" class="icon"></Icon>
+                  <Icon :name="item.category.svg" class="icon"></Icon>
                   <span class="tag">{{item.category.name}}</span>
                   <div class="notes">{{showNote(item)}}</div>
                 </div>

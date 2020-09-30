@@ -5,13 +5,12 @@
       <ul slot="content" class="tagList">
         <li v-for="tag in customTagList" :key="tag">
           <div class="icon-wrapper"
-               :class="{selected:tag === selectedTag } "
+               :class="{selected:tag.svg === selectedTag.svg } "
                @click="select(tag)">
             <Icon :name="tag"></Icon>
           </div>
         </li>
       </ul>
-
     </div>
   </div>
 </template>
@@ -24,15 +23,15 @@ import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
 import customTagList from "@/constants/customTagList";
-import {customTag} from "@/views/custom";
+import {Tag} from "@/views/custom";
 
 @Component({components: {Icon, Parts}})
 export default class customIcon extends Vue {
-  @Prop() selectedTag!:customTag
+  @Prop() selectedTag!:Tag
 
 customTagList = customTagList
 
-  select(tag:customTag){
+  select(tag:Tag){
     this.$emit('update:selectedTag',tag)
   }
 
