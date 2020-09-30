@@ -6,7 +6,7 @@
     <div slot="body">
       <ChooseMonth
           @update:value = "month= $event"/>
-      <div>
+      <div v-if="this.result!=={}">
         <ol>
           <li v-for="(group,index) in result" :key="index">
             <h3 class="title">
@@ -34,6 +34,7 @@
           </li>
         </ol>
       </div>
+      <div v-else class="notification">暂无数据</div>
     </div>
   </Layout>
 </template>

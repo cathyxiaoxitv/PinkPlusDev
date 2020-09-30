@@ -5,7 +5,8 @@
       <Parts>
         <p slot="title">名字</p>
         <label slot="content">
-          <a-input type="text" placeholder="请输入项目名"
+          <a-input type="text" placeholder="请输入标签名"
+                   :value.sync="newTag.name"
                    @input="onValueChanged"
           />
         </label>
@@ -40,8 +41,18 @@ export default class Add extends Vue {
     this.newTag.name = input.value;
   }
 save(){
-     this.newTag.type = this.$route.params.type
-    this.$store.commit('createTag',this.newTag)
+    if(this.newTag.name ===''){
+      this.$warning({
+        centered:true,
+        title: '请输入标签名',
+        content: '标签名不能为空'
+      })
+    }else{
+      this.newTag.type = this.$route.params.type
+      this.$store.commit('createTag',this.newTag)
+      this.$message.success({content: '已保存',duration:1});
+    }
+  this.newTag.name=''
 }
 
 }
