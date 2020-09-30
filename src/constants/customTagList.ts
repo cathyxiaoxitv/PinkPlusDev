@@ -1,2 +1,3 @@
-const customTagList = ['note','music']
+const customTagList = [{name:'',svg:'note'},
+    {name:'',svg:'music'}]
 export default customTagList;

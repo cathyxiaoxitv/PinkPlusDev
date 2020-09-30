@@ -3,11 +3,11 @@
     <p slot="title">图标</p>
     <div class="scrollArea">
       <ul slot="content" class="tagList">
-        <li v-for="tag in customTagList" :key="tag">
+        <li v-for="tag in customTagList" :key="tag.svg">
           <div class="icon-wrapper"
-               :class="{selected:tag.svg === selectedTag.svg } "
+               :class="{selected:tag.svg === selectedTag.svg} "
                @click="select(tag)">
-            <Icon :name="tag"></Icon>
+            <Icon :name="tag.svg"></Icon>
           </div>
         </li>
       </ul>

@@ -14,7 +14,7 @@
         <li v-for="tag in filteredList"
             class="detail">
           <div class="icon-wrapper">
-            <Icon :name="tag.name" class="icon"></Icon>
+            <Icon :name="tag.svg" class="icon"></Icon>
             <span class="tag">{{ tag.name }}</span>
           </div>
           <div @click="deleteTag(tag)">
