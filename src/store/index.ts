@@ -50,6 +50,15 @@ const store = new Vuex.Store({
         },
         saveTags(state){
             window.localStorage.setItem('tagList',JSON.stringify(state.tagList))
+        },
+        deleteTag(state,tag:Tag){
+            state.tagList =JSON.parse(window.localStorage.getItem('tagList')||'[]')
+            for(let i = 0;i<state.tagList.length;i++){
+                if(state.tagList[i].name === tag.name){
+                    state.tagList.splice(i,1)
+                }
+            }
+            store.commit('saveTags')
         }
     },
     actions: {},

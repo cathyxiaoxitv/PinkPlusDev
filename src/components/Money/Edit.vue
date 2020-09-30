@@ -49,8 +49,20 @@ addTag(){
     this.$router.push(`/money/edit/add/${this.type}`)
 }
   deleteTag(tag: Tag) {
-    console.log(tag.name);
-    this.$store.commit('deleteTag', tag.name)
+    const _this= this;
+    this.$confirm({
+      content: '确定要删除该标签吗?',
+      okText: '确定',
+      cancelText: "取消",
+      centered:true,
+      onOk(){
+        console.log('hi');
+        _this.$store.commit('deleteTag', tag)
+        _this.$message.success({content: '已删除',duration:1});
+      }
+    })
+
+
   }
 }
 </script>
