@@ -42,6 +42,7 @@ export default class Edit extends Vue {
   recordTypeList = recordTypeList;
 
   get filteredList() {
+    this.$store.commit('fetchTags')
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)
   }
 addTag(){
