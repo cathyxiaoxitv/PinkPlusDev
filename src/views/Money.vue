@@ -89,6 +89,7 @@ export default class Money extends Vue {
     justify-content: center;
     align-items: center;
     button {
+      height: 40px;
       cursor: pointer;
       width: 80%;
       background: $color-highlight;

@@ -1,2 +1,2 @@
-export default Object.freeze([{text: 'expense', value: 'expense'},
-  {text: 'income', value: 'income'}]);
+export default Object.freeze([{text: '支出', value: 'expense'},
+  {text: '收入', value: 'income'}]);

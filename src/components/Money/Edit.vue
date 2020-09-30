@@ -7,7 +7,7 @@
 
     <div slot="body">
       <div class="detail" @click="addTag">
-        <span class="add">追加新的种类</span>
+        <span class="add">追加新的标签</span>
         <span>></span>
       </div>
       <ol>

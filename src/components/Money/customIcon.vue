@@ -83,8 +83,8 @@ p {
       }
       svg {
         margin-top: 2px;
-        height: 20px;
-        width: 20px;
+        height: 30px;
+        width: 30px;
       }
 
       @keyframes shake {

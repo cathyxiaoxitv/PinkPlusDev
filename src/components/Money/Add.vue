@@ -1,8 +1,7 @@
 <template>
   <Layout>
-    <div class="mainTitle" slot="header">创建{{this.newTag.type}}新科目</div>
+    <div class="mainTitle" slot="header">创建新标签</div>
     <div slot="body">
-      {{this.newTag}}
       <Parts>
         <p slot="title">名字</p>
         <label slot="content">
@@ -35,7 +34,7 @@ import {Tag} from "@/views/custom";
 })
 export default class Add extends Vue {
   customTagList = customTagList
-  newTag:Tag={name:'',svg:'note',type:'expense'}
+  newTag:Tag={name:'',svg:'dog',type:'expense'}
 
   onValueChanged(event:InputEvent){
     const input = (event.currentTarget as HTMLInputElement)
@@ -141,6 +140,7 @@ save(){
   justify-content: center;
   align-items: center;
   button {
+    height: 40px;
     cursor: pointer;
     width: 80%;
     background: $color-highlight;
