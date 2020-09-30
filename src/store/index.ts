@@ -3,14 +3,15 @@ import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createId from "@/lib/createId";
 import defaultTagList from "@/constants/defaultTagList";
+import {RecordItem, RootState, Tag} from '@/views/custom';
 
 Vue.use(Vuex);
-
 
 
 const store = new Vuex.Store({
     state: {
         tagList: [],
+        customTagList:[],
         recordList: [],
         createTagError: null,
     } as RootState,

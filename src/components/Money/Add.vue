@@ -9,6 +9,9 @@
         </label>
       </Parts>
       <custom-tag :selectedTag.sync="newTag"/>
+      <div class="-button-wrapper">
+        <a-button @click='confirm'>确定</a-button>
+      </div>
     </div>
   </Layout>
 </template>
@@ -31,6 +34,7 @@ customTagList = customTagList
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 .mainTitle{
   font-weight: bold;
   font-size: larger;
@@ -103,6 +107,25 @@ customTagList = customTagList
         }
       }
     }
+  }
+}
+.-button-wrapper {
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    cursor: pointer;
+    width: 80%;
+    background: $color-highlight;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
   }
 }
 
