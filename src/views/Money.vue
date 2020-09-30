@@ -46,7 +46,7 @@ export default class Money extends Vue {
   record: RecordItem = this.initRecord();
 
   initRecord(): RecordItem {
-    return {category: {name: '饮食费', type: '支出'}, notes: '', type: '支出', amount: 0, createdAt: ''};
+    return {category: {name: '饮食费', type: 'expense'}, notes: '', type: 'expense', amount: 0, createdAt: ''};
   }
 
   confirm() {

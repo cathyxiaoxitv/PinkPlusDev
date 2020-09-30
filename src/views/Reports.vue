@@ -11,8 +11,8 @@
           :data-source="recordTypeList"
           :value.sync="record.type"/>
       <ul class="upper-wrapper">
-        <li :class="{red:this.expense>0}" @click="record.type ='支出'">-{{this.expense|addComma}}</li>
-        <li :class="{green:this.income>0}" @click="record.type ='收入'">+{{this.income|addComma}}</li>
+        <li :class="{red:this.expense>0}" @click="record.type ='expense'">-{{this.expense|addComma}}</li>
+        <li :class="{green:this.income>0}" @click="record.type ='income'">+{{this.income|addComma}}</li>
       </ul>
       <div class="down-wrapper">
         <span
@@ -83,13 +83,13 @@ export default class Reports extends Vue {
       totalMap.set(type, value);
     }
   }
-     if(totalMap.get('收入')){
-       this.income = totalMap.get('收入')
+     if(totalMap.get('income')){
+       this.income = totalMap.get('income')
      }else{
        this.income = 0
      }
-     if(totalMap.get('支出')){
-       this.expense = totalMap.get('支出')
+     if(totalMap.get('expense')){
+       this.expense = totalMap.get('expense')
      }else{
        this.expense = 0
      }
@@ -100,7 +100,7 @@ export default class Reports extends Vue {
   }
 
   initRecord(): RecordItem {
-    return {category: {name: '饮食费', type: '支出'}, notes: '', type: '支出', amount: 0, createdAt: ''};
+    return {category: {name: '饮食费', type: 'expense'}, notes: '', type: 'expense', amount: 0, createdAt: ''};
   }
 
   initReport(): ReportItem {
