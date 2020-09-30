@@ -5,12 +5,14 @@
       <Parts>
         <p slot="title">名字</p>
         <label slot="content">
-          <a-input type="text" placeholder="请输入项目名"/>
+          <a-input type="text" placeholder="请输入项目名"
+          />
         </label>
       </Parts>
-      <custom-tag :selectedTag.sync="newTag"/>
+      <custom-icon/>
+
       <div class="-button-wrapper">
-        <a-button @click='confirm'>确定</a-button>
+        <a-button @click="save">确定</a-button>
       </div>
     </div>
   </Layout>
@@ -23,13 +25,17 @@ import Parts from "@/components/Money/Parts.vue";
 import Categories from "@/components/Money/Categories.vue";
 import customTagList from "@/constants/customTagList";
 import Icon from "@/components/Icon.vue";
-import CustomTag from "@/components/Money/customTag.vue";
+import CustomIcon from "@/components/Money/customIcon.vue";
+import {Tag} from "@/views/custom";
 @Component({
-  components: {CustomTag, Icon, Parts,Categories}
+  components: {CustomIcon, Icon, Parts,Categories}
 })
 export default class Add extends Vue {
-customTagList = customTagList
-  newTag = {name:'note'}
+  customTagList = customTagList
+  newTag:Tag
+save(){
+    this.$store.commit('createTag',this.newTag)
+}
 }
 </script>
 

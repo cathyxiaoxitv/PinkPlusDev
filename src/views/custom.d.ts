@@ -1,4 +1,4 @@
-import customTag from "@/components/Money/customTag.vue";
+import customTag from "@/components/Money/customIcon.vue";
 
 type RootState = {
   tagList: Tag[],
@@ -9,6 +9,7 @@ type RootState = {
 
 type Tag = {
   id:string,
+  svg:string,
   name: string,
   type:string
 }
@@ -24,9 +25,4 @@ type RecordItem = {
   notes: string
   amount: number
   category: Tag
-}
-
-type ReportItem = {
-  text:string
-  value:string
 }

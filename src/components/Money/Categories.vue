@@ -36,8 +36,7 @@ export default class Categories extends Vue {
 
 //better 重复
 created(){
-    this.$store.commit('fetchTags')
-    this.$store.commit('createTag')
+  this.$store.commit('fetchTags')
 }
   get filteredList() {
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)
@@ -55,7 +54,7 @@ created(){
     this.$emit('update:selectedTag',tag)
   }
   edit(){
-    this.$router.replace('/money/edit')
+    this.$router.push('/money/edit')
   }
 
 

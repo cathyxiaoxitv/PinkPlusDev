@@ -45,7 +45,7 @@ export default class Edit extends Vue {
     return this.$store.state.tagList.filter((tag: Tag) => tag.type === this.type)
   }
 addTag(){
-    this.$router.replace('/money/edit/add')
+    this.$router.push(`/money/edit/add/${this.type}`)
 }
   deleteTag(tag: Tag) {
     console.log(tag.name);

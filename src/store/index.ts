@@ -38,14 +38,14 @@ const store = new Vuex.Store({
                 store.commit('createTag',defaultTagList[i])
             }
         },
-        createTag(state, tag:Tag) {
-            const names = state.tagList.map(tag => tag.name);
-            if (names.indexOf(tag.name) >= 0) {
+        createTag(state, newTag:Tag) {
+            const names = state.tagList.map(item => item.name);
+            if (names.indexOf(newTag.name) >= 0) {
                 state.createTagError = new Error('tag name duplicated')
                 return;
             }
             const id = createId().toString();
-            state.tagList.push({id, name: tag.name,type:tag.type})
+            state.tagList.push({id, name: newTag.name,type:newTag.type,svg:newTag.svg})
             store.commit('saveTags')
         },
         saveTags(state){

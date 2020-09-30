@@ -18,7 +18,7 @@ Vue.use(VueRouter)
       path:'/money/edit',
       component:Edit,
     },
-    {path:'/money/edit/add',
+    {path:'/money/edit/add/:type',
       component:Add,
     },
     {

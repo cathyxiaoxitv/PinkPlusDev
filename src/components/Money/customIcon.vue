@@ -1,13 +1,13 @@
 <template>
   <div>
-    <p slot="title">分类</p>
+    <p slot="title">图标</p>
     <div class="scrollArea">
       <ul slot="content" class="tagList">
-        <li v-for="tag in customTagList" :key="tag.name">
+        <li v-for="tag in customTagList" :key="tag">
           <div class="icon-wrapper"
-               :class="{selected:tag.name === selectedTag.name } "
+               :class="{selected:tag === selectedTag } "
                @click="select(tag)">
-            <Icon :name="tag.name"></Icon>
+            <Icon :name="tag"></Icon>
           </div>
         </li>
       </ul>
@@ -24,9 +24,10 @@ import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
 import customTagList from "@/constants/customTagList";
+import {customTag} from "@/views/custom";
 
 @Component({components: {Icon, Parts}})
-export default class customTag extends Vue {
+export default class customIcon extends Vue {
   @Prop() selectedTag!:customTag
 
 customTagList = customTagList
