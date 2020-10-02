@@ -9,13 +9,13 @@ export type Tag = {
   id:string,
   svg:string,
   name: string,
-  type:string
+  type:moneyType
 }
 
-
+type moneyType = 'income'|'expense'
 
 type RecordItem = {
-  type: string
+  type: moneyType
   createdAt?: string
   notes: string
   amount: number
