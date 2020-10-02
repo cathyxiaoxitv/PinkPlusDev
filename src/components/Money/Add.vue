@@ -5,14 +5,15 @@
       <Parts>
         <p slot="title">名字</p>
         <label slot="content">
-          <a-input type="text" placeholder="请输入标签名"
+          <a-input ref="newTagName"
+              type="text" placeholder="请输入标签名"
                    :value.sync="newTag.name"
                    @input="onValueChanged"
           />
         </label>
       </Parts>
       <custom-icon :selected-tag.sync="newTag"/>
-
+{{this.newTag}}
       <div class="-button-wrapper">
         <a-button @click="save">确定</a-button>
       </div>
@@ -29,32 +30,42 @@ import customTagList from "@/constants/customTagList";
 import Icon from "@/components/Icon.vue";
 import CustomIcon from "@/components/Money/customIcon.vue";
 import {Tag} from "@/views/custom";
+
 @Component({
   components: {CustomIcon, Icon, Parts,Categories}
 })
 export default class Add extends Vue {
   customTagList = customTagList
-  newTag:Tag={name:'',svg:'dog',type:'expense'}
+  newTag:Tag={svg:'dog',name:'',type:this.$route.params.type}
+  selectedTag:string[] = [];
 
   onValueChanged(event:InputEvent){
     const input = (event.currentTarget as HTMLInputElement)
     this.newTag.name = input.value;
   }
 save(){
-    if(this.newTag.name ===''){
+    if(this.newTag.name === ''){
+      console.log('empty');
       this.$warning({
         centered:true,
         title: '请输入标签名',
         content: '标签名不能为空'
-      })
-    }else{
+      })}
+  else if (this.$store.state.createTagError) {
+    console.log('again');
+    this.$warning({
+        centered:true,
+        title: '标签名重复了',
+        content: '再另外想一个吧！'
+    })
+    return
+  }else {
       this.newTag.type = this.$route.params.type
-      this.$store.commit('createTag',this.newTag)
-      this.$message.success({content: '已保存',duration:1});
-    }
+      this.$store.commit('createTag', this.newTag)
+      this.$message.success({content: '已保存', duration: 1});
+  }
   this.newTag.name=''
 }
-
 }
 </script>
 

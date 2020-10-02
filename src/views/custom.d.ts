@@ -1,23 +1,18 @@
-import customTag from "@/components/Money/customIcon.vue";
 
 type RootState = {
   tagList: Tag[],
-  customTagList:customTag[],
   recordList:RecordItem[]
   createTagError:Error|null
 }
 
-type Tag = {
+export type Tag = {
   id:string,
   svg:string,
   name: string,
   type:string
 }
 
-type customTag={
-  id:string,
-  name:string
-}
+
 
 type RecordItem = {
   type: string

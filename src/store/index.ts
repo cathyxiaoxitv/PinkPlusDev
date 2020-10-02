@@ -11,7 +11,6 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         tagList: [],
-        customTagList:[],
         recordList: [],
         createTagError: null,
     } as RootState,

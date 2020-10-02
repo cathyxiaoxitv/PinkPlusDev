@@ -30,6 +30,7 @@ export default class customIcon extends Vue {
 customTagList = customTagList
 
   select(tag:Tag){
+
     this.$emit('update:selectedTag',tag)
   }
 

@@ -93,9 +93,9 @@ export default class Reports extends Vue {
       }
     }
     if(total>0){
-      return 'income'+this.addComma(total)
+      return '+'+this.addComma(total)
     }else if(total<0){
-      return 'expense'+this.addComma(total)
+      return '-'+this.addComma(total)
     }else{
       return '0'
     }
@@ -112,9 +112,9 @@ export default class Reports extends Vue {
   showAmount(item:RecordItem){
     let commaAmount = this.addComma(item.amount)
     if(item.type === 'income'){
-      return 'income'+commaAmount
+      return '+'+commaAmount
     }else{
-      return 'expense'+commaAmount
+      return '-'+commaAmount
     }
   }
   editRecord(){
