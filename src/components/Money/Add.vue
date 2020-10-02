@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="mainTitle" slot="header">创建新标签</div>
+    <div class="mainTitle" slot="header">{{moneyType}}新标签</div>
     <div slot="body">
       <Parts>
         <p slot="title">名字</p>
@@ -39,6 +39,13 @@ export default class Add extends Vue {
   newTag:Tag={svg:'dog',name:'',type:this.$route.params.type}
   selectedTag:string[] = [];
 
+  get moneyType(){
+    const map ={
+      'expense':'支出',
+      'income':'收入'
+    }
+    return map[this.$route.params.type]
+  }
   onValueChanged(event:InputEvent){
     const input = (event.currentTarget as HTMLInputElement)
     this.newTag.name = input.value;
