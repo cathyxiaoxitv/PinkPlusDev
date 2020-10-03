@@ -17,7 +17,18 @@
             :class="{green:this.income>this.expense,red:this.expense>this.income}">共计: {{this.income-this.expense|addComma}}</span >
       </div>
       <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
-      <div v-else class="notification">暂无数据</div>
+      <div v-else class="notification">
+        <a-empty :image="simpleImage"
+            :image-style="{
+      height: '30px',
+    }"
+        >
+          <span slot="description"> 暂无数据</span>
+          <a-button type="primary" @click="newRecord">
+            记一笔
+          </a-button>
+        </a-empty>
+      </div>
     </div>
   </Layout>
 </template>
@@ -33,7 +44,8 @@ import recordTypeList from "@/constants/recordTypeList";
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 import clone from "@/lib/clone";
 import _ from 'lodash'
-import { RecordItem } from './custom';
+import {RecordItem, RootState} from './custom';
+import { Empty } from 'ant-design-vue';
 
 
 type HashTableValue = { title: string, item: number[] }
@@ -50,12 +62,14 @@ type CategoryArray = { name: string, value: number }
   }
 })
 export default class Reports extends Vue {
+
   month = ''
   expense = 0
   income = 0
   recordTypeList = recordTypeList;
   record: RecordItem = this.initRecord();
    clonedList = clone(this.recordList).map(r => _.pick(r, ['createdAt', 'amount', 'category', 'type']));
+  simpleImage: any;
    @Watch('month')
   updateBalance() {
      let thisMonthList = []
@@ -90,6 +104,7 @@ export default class Reports extends Vue {
      return this.expense & this.income
 }
   beforeCreate() {
+    this.simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
     this.$store.commit('fetchRecords')
   }
 
@@ -101,6 +116,9 @@ export default class Reports extends Vue {
 
   get recordList() {
     return (this.$store.state as RootState).recordList;
+  }
+  newRecord(){
+     this.$router.push('/money')
   }
 comment() {
   if (this.income - this.expense > 0) {

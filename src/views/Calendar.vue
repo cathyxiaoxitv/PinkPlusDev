@@ -19,7 +19,6 @@
             <ol>
               <li v-for="item in group.item" :key="item.id"
                   class="detail"
-                  @click="editRecord"
               >
                 <div class="icon-wrapper">
                   <Icon :name="item.category.svg" class="icon"></Icon>
