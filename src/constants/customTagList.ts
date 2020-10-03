@@ -1,15 +1,15 @@
-const customTagList = [
-    {svg:'dog',name:'',type:''},
-    {svg:'cat',name:'',type:''},
-    {svg:'bird',name:'',type:''},
-    {svg:'rabbit',name:'',type:''},
-    {svg:'信用卡',name:'',type:''},
-    {svg:'唱歌话筒',name:'',type:''},
-    {svg:'彩票',name:'',type:''},
-    {svg:'投资',name:'',type:''},
-    {svg:'比特币',name:'',type:''},
-    {svg:'珍珠奶茶',name:'',type:''},
-    {svg:'钻石',name:'',type:''},
-    {svg:'储蓄',name:'',type:''},
+const CATEGORY_ICON_NAMES = [
+    'dog',
+    'cat',
+    'bird',
+    'rabbit',
+    '信用卡',
+    '唱歌话筒',
+    '彩票',
+    '投资',
+    '比特币',
+    '珍珠奶茶',
+    '钻石',
+    '储蓄',
 ]
-export default customTagList;
+export default CATEGORY_ICON_NAMES;

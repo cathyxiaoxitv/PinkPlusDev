@@ -1,19 +1,10 @@
 <template>
   <Layout>
-    <div class="mainTitle" slot="header">{{moneyType}}新标签</div>
+    <div class="mainTitle" slot="header">{{ moneyType }}新标签</div>
+
     <div slot="body">
-      <Parts>
-        <p slot="title">名字</p>
-        <label slot="content">
-          <a-input ref="newTagName"
-              type="text" placeholder="请输入标签名"
-                   :value.sync="newTag.name"
-                   @input="onValueChanged"
-          />
-        </label>
-      </Parts>
-      <custom-icon :selected-tag.sync="newTag"/>
-{{this.newTag}}
+      <category-info v-model="categoryName"/>
+      <icon-list v-model="categoryIcon"/>
       <div class="-button-wrapper">
         <a-button @click="save">确定</a-button>
       </div>
@@ -26,63 +17,73 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Parts from "@/components/Money/Parts.vue";
 import Categories from "@/components/Money/Categories.vue";
-import customTagList from "@/constants/customTagList";
 import Icon from "@/components/Icon.vue";
-import CustomIcon from "@/components/Money/customIcon.vue";
-import {Tag} from "@/views/custom";
+import CustomIcon from "@/components/Money/IconList.vue";
+import {moneyType} from "@/views/custom";
+import IconList from "@/components/Money/IconList.vue";
+import CATEGORY_ICON_NAMES from "@/constants/customTagList";
+import CategoryInfo from "@/components/Money/CategoryInfo.vue";
 
 @Component({
-  components: {CustomIcon, Icon, Parts,Categories}
+  components: {CategoryInfo, IconList, CustomIcon, Icon, Parts, Categories}
 })
 export default class Add extends Vue {
-  customTagList = customTagList
-  newTag:Tag={svg:'dog',name:'',type:this.$route.params.type}
-  selectedTag:string[] = [];
+  iconList = CATEGORY_ICON_NAMES
+  categoryIcon = CATEGORY_ICON_NAMES[0]
+  categoryName = ''
 
-  get moneyType(){
-    const map ={
-      'expense':'支出',
-      'income':'收入'
+  get tagList() {
+    return this.$store.commit('fetchTags');
+  }
+
+  get moneyType() {
+    const map = {
+      'expense': '支出',
+      'income': '收入'
     }
-    return map[this.$route.params.type]
+    return map[this.$route.params.type as moneyType]
   }
-  onValueChanged(event:InputEvent){
-    const input = (event.currentTarget as HTMLInputElement)
-    this.newTag.name = input.value;
-  }
-save(){
-    if(this.newTag.name === ''){
-      console.log('empty');
+
+  save() {
+    this.$store.commit('fetchTags')
+    const names = this.$store.state.tagList.map(tag => tag.name)
+    console.log(names);
+    if (this.categoryName.length === 0) {
       this.$warning({
-        centered:true,
-        title: '请输入标签名',
-        content: '标签名不能为空'
-      })}
-  else if (this.$store.state.createTagError) {
-    console.log('again');
-    this.$warning({
-        centered:true,
+        centered: true,
+        title: '标签名不能为空',
+        content: '请输入标签名'
+      })
+    } else if (names.indexOf(this.categoryName) >= 0) {
+      this.$warning({
+        centered: true,
         title: '标签名重复了',
-        content: '再另外想一个吧！'
-    })
-    return
-  }else {
-      this.newTag.type = this.$route.params.type
-      this.$store.commit('createTag', this.newTag)
+        content: '请重新输入'
+      })
+      this.categoryName = ''
+    } else {
+      this.$store.commit('createTag', {
+        svg: this.categoryIcon,
+        type: this.$route.params.type as moneyType,
+        name: this.categoryName
+      })
       this.$message.success({content: '已保存', duration: 1});
+      this.categoryName = ''
+    }
+
   }
-  this.newTag.name=''
-}
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-.mainTitle{
+
+.mainTitle {
   font-weight: bold;
   font-size: larger;
 }
-.icon-area{
+
+.icon-area {
   p {
     padding: 10px 20px;
     font-weight: bold;
@@ -126,6 +127,7 @@ save(){
           }
         }
       }
+
       svg {
         margin-top: 2px;
         height: 50px;
@@ -152,11 +154,13 @@ save(){
     }
   }
 }
+
 .-button-wrapper {
   height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
+
   button {
     height: 40px;
     cursor: pointer;

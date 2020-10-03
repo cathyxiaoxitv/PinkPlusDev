@@ -36,6 +36,7 @@ import Parts from '@/components/Money/Parts.vue';
 import Categories from '@/components/Money/Categories.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import DatePicker from '@/components/Money/DatePicker.vue';
+import { RecordItem } from './custom';
 
 @Component({
   components: {DatePicker, Categories, Number, Notes, Parts, Tabs}
@@ -46,7 +47,7 @@ export default class Money extends Vue {
   record: RecordItem = this.initRecord();
 
   initRecord(): RecordItem {
-    return {category: {name: '饮食费', type: 'expense'}, notes: '', type: 'expense', amount: 0, createdAt: ''};
+    return {category: {id:'',name: '饮食费', type: 'expense',svg:'饮食费'}, notes: '', type: 'expense', amount: 0, createdAt: ''};
   }
 
   confirm() {

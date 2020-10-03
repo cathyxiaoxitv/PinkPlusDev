@@ -3,11 +3,11 @@
     <p slot="title">图标</p>
     <div class="scrollArea">
       <ul slot="content" class="tagList">
-        <li v-for="tag in customTagList" :key="tag.svg">
-          <div class="icon-wrapper"
-               :class="{selected:tag.svg === selectedTag.svg} "
-               @click="select(tag)">
-            <Icon :name="tag.svg"></Icon>
+        <li v-for="svg in iconList" :key="svg"
+            @click="$emit('change',svg)"
+        >
+          <div :class="highlight(svg)">
+            <Icon :name="svg"></Icon>
           </div>
         </li>
       </ul>
@@ -16,23 +16,24 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Model} from 'vue-property-decorator';
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
-import customTagList from "@/constants/customTagList";
-import {Tag} from "@/views/custom";
+import CATEGORY_ICON_NAMES from "@/constants/customTagList";
 
 @Component({components: {Icon, Parts}})
-export default class customIcon extends Vue {
-  @Prop() selectedTag!:Tag
+export default class IconList extends Vue {
+  @Model('change', {required: true, type: String}) readonly icon!: string
+  iconList = CATEGORY_ICON_NAMES
 
-customTagList = customTagList
-
-  select(tag:Tag){
-
-    this.$emit('update:selectedTag',tag)
+  highlight(svg: string) {
+    return {
+      'icon-wrapper':true,
+      'selected': this.icon === svg
+    }
   }
+
 
 };
 </script>
@@ -82,6 +83,7 @@ p {
           }
         }
       }
+
       svg {
         margin-top: 2px;
         height: 30px;
