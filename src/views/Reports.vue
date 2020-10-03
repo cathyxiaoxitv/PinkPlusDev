@@ -1,15 +1,12 @@
 <template>
   <Layout>
     <Tabs slot="header"
-          :data-source="reportTypeList"
-          :value.sync="report.value"/>
+          :data-source="recordTypeList"
+          :value.sync="record.type"/>
 
     <div slot="body">
       <ChooseMonth @update:value="month= $event"/>
 
-      <SimpleTab
-          :data-source="recordTypeList"
-          :value.sync="record.type"/>
       <ul class="upper-wrapper">
         <li :class="{red:this.expense>0}" @click="record.type ='expense'">-{{this.expense|addComma}}</li>
         <li :class="{green:this.income>0}" @click="record.type ='income'">+{{this.income|addComma}}</li>
@@ -32,12 +29,11 @@ import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 import Chart from '@/components/Chart.vue'
-import reportTypeList from '@/constants/reportTypeList';
 import recordTypeList from "@/constants/recordTypeList";
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
-import SimpleTab from "@/components/Reports/SimpleTab.vue";
 import clone from "@/lib/clone";
 import _ from 'lodash'
+import { RecordItem } from './custom';
 
 
 type HashTableValue = { title: string, item: number[] }
@@ -45,7 +41,7 @@ type hashTable = { [key: string]: HashTableValue }
 type CategoryArray = { name: string, value: number }
 
 @Component({
-  components: {ChooseMonth, Tabs, Chart, SimpleTab},
+  components: {ChooseMonth, Tabs, Chart},
   filters:{
     addComma(amount:number){
       if(!amount){return}
@@ -58,9 +54,7 @@ export default class Reports extends Vue {
   expense = 0
   income = 0
   recordTypeList = recordTypeList;
-  reportTypeList = reportTypeList;
   record: RecordItem = this.initRecord();
-  report: ReportItem = this.initReport();
    clonedList = clone(this.recordList).map(r => _.pick(r, ['createdAt', 'amount', 'category', 'type']));
    @Watch('month')
   updateBalance() {
@@ -100,12 +94,10 @@ export default class Reports extends Vue {
   }
 
   initRecord(): RecordItem {
-    return {category: {name: '饮食费', type: 'expense'}, notes: '', type: 'expense', amount: 0, createdAt: ''};
+    return {category: {name: '饮食费', type: 'expense',svg:'饮食费',id:''}, notes: '', type: 'expense', amount: 0, createdAt: ''};
   }
 
-  initReport(): ReportItem {
-    return {text: '月度报告', value: 'month'}
-  }
+
 
   get recordList() {
     return (this.$store.state as RootState).recordList;

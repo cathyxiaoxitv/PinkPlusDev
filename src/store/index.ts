@@ -38,7 +38,6 @@ const store = new Vuex.Store({
             }
         },
         createTag(state, newTag:Tag) {
-            console.log('good');
             const id = createId().toString();
             state.tagList.push({id, name: newTag.name,type:newTag.type,svg:newTag.svg})
             store.commit('saveTags')

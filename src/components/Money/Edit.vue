@@ -56,7 +56,6 @@ addTag(){
       cancelText: "取消",
       centered:true,
       onOk(){
-        console.log('hi');
         _this.$store.commit('deleteTag', tag)
         _this.$message.success({content: '已删除',duration:1});
       }

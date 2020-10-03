@@ -13,7 +13,7 @@
               <span>{{group.title}}</span>
               <span
                   class="amount"
-                  :class="{positive:showTotal(group).substring(0,1)==='income'}"
+                  :class="{positive:showTotal(group).substring(0,1)==='+'}"
               >{{ showTotal(group)}}</span>
             </h3>
             <ol>
@@ -48,6 +48,7 @@ import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 import clone from "@/lib/clone";
+import { RecordItem, RootState } from './custom';
 
 type HashTableValue = { title: string, item:RecordItem[]}
 type hashTable = { [key: string]: HashTableValue }
@@ -77,7 +78,6 @@ export default class Reports extends Vue {
         totalTable[date].item.push(newList[i])
       }
     }
-    console.log(totalTable);
     return totalTable
   }
 
@@ -116,9 +116,6 @@ export default class Reports extends Vue {
     }else{
       return '-'+commaAmount
     }
-  }
-  editRecord(){
-    console.log('hi');
   }
 };
 </script>
