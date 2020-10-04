@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 window.onload = function () {
   document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
@@ -22,6 +22,7 @@ window.onload = function () {
     lastTouchEnd = now;
   }, false);
 };
+
 </script>
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
@@ -29,11 +30,9 @@ window.onload = function () {
 body {
   max-width: 500px;
   margin: 0 auto;
-
 }
 
 #app {
-
   position: relative;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
