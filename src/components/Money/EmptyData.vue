@@ -1,10 +1,10 @@
 <template>
-  <a-empty v-else :image="simpleImage"
+  <a-empty v-else
            :image-style="{
-      height: '30px',
+      height: '60px',
     }"
   >
-    <span slot="description">暂无数据</span>
+    <span slot="description" style="color: lightgrey">暂无数据</span>
     <a-button type="primary" @click="newRecord">
       记一笔
     </a-button>
@@ -15,13 +15,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import {Empty} from "ant-design-vue";
 
 @Component
 export default class EmptyData extends Vue  {
     simpleImage: any;
   beforeCreate() {
-    this.simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
     this.$store.commit('fetchRecords')
   }
   newRecord(){
@@ -31,5 +29,4 @@ export default class EmptyData extends Vue  {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

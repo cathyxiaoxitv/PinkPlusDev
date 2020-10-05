@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import {Component} from 'vue-property-decorator';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
@@ -27,7 +27,7 @@ export default class DatePicker extends Vue {
     return new Date().toLocaleDateString();
   };
 
-  selectDate(moment){
+  selectDate(moment:Moment){
     const selectedDate = moment.format().substring(0,10);
     this.$emit('update:value',selectedDate)
   }

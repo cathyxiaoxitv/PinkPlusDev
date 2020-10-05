@@ -47,7 +47,7 @@ export default class Add extends Vue {
 
   save() {
     this.$store.commit('fetchTags')
-    const names = this.$store.state.tagList.map(tag => tag.name)
+    const names = this.$store.state.tagList.map((tag: { name: any; }) => tag.name)
     if (this.categoryName.length === 0) {
       this.$warning({
         centered: true,

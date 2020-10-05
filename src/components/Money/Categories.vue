@@ -28,6 +28,7 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 import Vue from 'vue';
 import Parts from '@/components/Money/Parts.vue';
 import Icon from '@/components/Icon.vue';
+import { Tag } from '@/views/custom';
 
 @Component({components: {Icon, Parts}})
 export default class Categories extends Vue {
@@ -45,9 +46,9 @@ created(){
   @Watch('type')
   updateCategory() {
     if (this.type === "+") {
-      this.select({name:'工资',type:'income'})
+      this.select({name:'工资',type:'income',id:'',svg:''})
     } else{
-      this.select({name:'饮食费',type:'expense'})
+      this.select({name:'饮食费',type:'expense',id:'',svg:''})
     }
   }
   select(tag:Tag){

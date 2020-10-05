@@ -32,6 +32,7 @@ import Vue from 'vue';
 import Tabs from "@/components/Money/Tabs.vue";
 import {Component} from 'vue-property-decorator';
 import recordTypeList from '@/constants/recordTypeList';
+import { Tag } from '@/views/custom';
 
 
 @Component({
