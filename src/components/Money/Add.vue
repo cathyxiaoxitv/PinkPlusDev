@@ -24,6 +24,7 @@ import IconList from "@/components/Money/IconList.vue";
 import CATEGORY_ICON_NAMES from "@/constants/customTagList";
 import CategoryInfo from "@/components/Money/CategoryInfo.vue";
 
+
 @Component({
   components: {CategoryInfo, IconList, CustomIcon, Icon, Parts, Categories}
 })

@@ -4,10 +4,8 @@
       <p>明细</p>
     </div>
     <div slot="body">
-      <ChooseMonth
-          @update:value = "month= $event"/>
-      <div v-if="this.result!=={}">
-        <ol>
+      <ChooseMonth @update:value = "month= $event"/>
+        <ol v-if="Object.keys(result).length>0">
           <li v-for="(group,index) in result" :key="index">
             <h3 class="title">
               <span>{{group.title}}</span>
@@ -32,8 +30,7 @@
             </ol>
           </li>
         </ol>
-      </div>
-      <div v-else class="notification">暂无数据</div>
+      <empty-data v-else/>
     </div>
   </Layout>
 </template>
@@ -48,12 +45,14 @@ import Tabs from '@/components/Money/Tabs.vue';
 import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 import clone from "@/lib/clone";
 import { RecordItem, RootState } from './custom';
+import EmptyData from "@/components/Money/EmptyData.vue";
+
 
 type HashTableValue = { title: string, item:RecordItem[]}
 type hashTable = { [key: string]: HashTableValue }
 
 @Component({
-  components: {ChooseMonth, Tabs}
+  components: {EmptyData, ChooseMonth, Tabs}
 })
 export default class Reports extends Vue {
   month = ''

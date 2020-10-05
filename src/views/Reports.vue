@@ -17,18 +17,7 @@
             :class="{green:this.income>this.expense,red:this.expense>this.income}">共计: {{this.income-this.expense|addComma}}</span >
       </div>
       <Chart v-if="categoryList.length>0" class="chart" :options="chartOptions"/>
-      <div v-else class="notification">
-        <a-empty :image="simpleImage"
-            :image-style="{
-      height: '30px',
-    }"
-        >
-          <span slot="description"> 暂无数据</span>
-          <a-button type="primary" @click="newRecord">
-            记一笔
-          </a-button>
-        </a-empty>
-      </div>
+   <empty-data v-else/>
     </div>
   </Layout>
 </template>
@@ -45,7 +34,7 @@ import ChooseMonth from "@/components/Calendar/ChooseMonth.vue";
 import clone from "@/lib/clone";
 import _ from 'lodash'
 import {RecordItem, RootState} from './custom';
-import { Empty } from 'ant-design-vue';
+import EmptyData from "@/components/Money/EmptyData.vue";
 
 
 type HashTableValue = { title: string, item: number[] }
@@ -53,7 +42,7 @@ type hashTable = { [key: string]: HashTableValue }
 type CategoryArray = { name: string, value: number }
 
 @Component({
-  components: {ChooseMonth, Tabs, Chart},
+  components: {EmptyData, ChooseMonth, Tabs, Chart},
   filters:{
     addComma(amount:number){
       if(!amount){return}
@@ -103,22 +92,13 @@ export default class Reports extends Vue {
      }
      return this.expense & this.income
 }
-  beforeCreate() {
-    this.simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
-    this.$store.commit('fetchRecords')
-  }
 
   initRecord(): RecordItem {
     return {category: {name: '饮食费', type: 'expense',svg:'饮食费',id:''}, notes: '', type: 'expense', amount: 0, createdAt: ''};
   }
 
-
-
   get recordList() {
     return (this.$store.state as RootState).recordList;
-  }
-  newRecord(){
-     this.$router.push('/money')
   }
 comment() {
   if (this.income - this.expense > 0) {
@@ -301,16 +281,6 @@ comment() {
   }
   display: flex;
   justify-content: center;
-
-
 }
-.notification {
-  font-weight: bold;
-  color: lightgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
 
-}
 </style>
