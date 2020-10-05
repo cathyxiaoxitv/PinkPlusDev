@@ -4,7 +4,7 @@
       height: '30px',
     }"
   >
-    <span slot="description"> 暂无数据</span>
+    <span slot="description">暂无数据</span>
     <a-button type="primary" @click="newRecord">
       记一笔
     </a-button>

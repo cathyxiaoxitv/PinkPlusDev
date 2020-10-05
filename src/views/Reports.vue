@@ -23,8 +23,6 @@
 </template>
 
 <script lang="ts">
-
-
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 import Tabs from '@/components/Money/Tabs.vue';
