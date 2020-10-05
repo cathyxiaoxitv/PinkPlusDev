@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <div>当前页面不存在，请检查网址是否正确</div>
-    <div><router-link to="/">返回首页</router-link></div>
-  </div>
+  <empty-data></empty-data>
 
 </template>
 
 <script lang="ts">
-export default {
-name: "NotFound"
+import Vue from "vue";
+import {Component} from "vue-property-decorator";
+import EmptyData from "@/components/Money/EmptyData.vue";
+
+@Component({
+  components: {EmptyData}
+})
+export default class NotFound extends Vue {
 }
 </script>
 

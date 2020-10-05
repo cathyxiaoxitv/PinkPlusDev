@@ -70,7 +70,7 @@ body {
 }
 
 .slogan{
-  color: white;
+  color: black;
   font-size: larger;
   font-weight: bolder;
   background: lighten($color-highlight,5%)
