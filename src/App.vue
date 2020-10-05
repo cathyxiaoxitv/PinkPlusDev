@@ -1,10 +1,17 @@
 <template>
   <div id="app">
-    <router-view class="router-view"/>
+      <router-view class="router-view"/>
+    <pop-up  v-model="showQrcode" style="text-align: center">
+      <img class="qrcode" src="./assets/qrcode.png" alt="qrcode">
+      <div class="slogan">扫描二维码👆<br/>在手机上使用体验更佳✨</div>
+    </pop-up>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import {Component} from "vue-property-decorator";
+import PopUp from './views/PopUp.vue'
 window.onload = function () {
   document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
@@ -22,11 +29,24 @@ window.onload = function () {
     lastTouchEnd = now;
   }, false);
 };
+@Component({
+  components: {PopUp}
+})
+export default class App extends Vue {
+  transitionName = ''
+  showQrcode = false
 
+  created(){
+    if(document.documentElement.clientWidth >500){
+      this.showQrcode = true
+    }
+  }
+}
 </script>
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
 @import "~@/assets/style/reset.scss";
+@import "~@/assets/style/animation.scss";
 body {
   max-width: 500px;
   margin: 0 auto;
@@ -48,4 +68,13 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.slogan{
+  color: white;
+  font-size: larger;
+  font-weight: bolder;
+  background: lighten($color-highlight,5%)
+
+}
+
 </style>
